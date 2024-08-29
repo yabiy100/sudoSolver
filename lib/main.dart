@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sudoku_solver/screens/input_screen.dart';
+import 'package:sudoku_solver/screens/titel_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,6 +14,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Sudoku Solver',
+      initialRoute: "/",
+      routes: {
+        "/": (context) => const TitleScreen(),
+        "/input": (context) => const InputScreen(),
+      },
+
+
+
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -31,7 +41,6 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'The awesome Sudoku Solver'),
     );
   }
 }
