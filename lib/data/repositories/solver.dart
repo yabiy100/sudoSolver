@@ -81,4 +81,8 @@ class Solver {
     }
   }
 
+  List<List<int?>> getField() {
+    return grid;
+  }
+
 }
