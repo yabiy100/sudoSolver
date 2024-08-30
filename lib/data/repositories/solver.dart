@@ -2,18 +2,19 @@ class Solver {
   List<List<int?>> grid = [];
   int lineSize = 9;
   List<List<int?>> solvedGrid = [];
+  List<List<List<int?>>> options = [];
 
   Solver(List<String> rawInput){
-    transform(rawInput);
-    solvedGrid = grid;
+    transformToGrid(rawInput);
     printGrid();
-    solveGrid();
+    copyStartGridToOptions();
   }
 
-  void transform(List<String> rawInput) {
+  void transformToGrid(List<String> rawInput) {
     print(rawInput);
     for(String line in rawInput){
       List<int?> intLine = [];
+      //if the hole line is empty fill it with 9 null entries
       if(line.isEmpty){
         intLine = List.filled(9, null);
         grid.add(intLine);
@@ -35,8 +36,7 @@ class Solver {
     grid.add(intLine);
   }
   void solveGrid(){
-    List<List<List<int?>>> options = [];
-    copyStartGrid(options);
+
     //find out which Number isnt used in a line and save them
     //in every empty field
     for(List<List<int?>> line in options){
@@ -62,8 +62,8 @@ class Solver {
     }
   }
 
-  void copyStartGrid(List<List<List<int?>>> options) {
-     List<List<int?>> line = [];
+  void copyStartGridToOptions() {
+    List<List<int?>> line = [];
     for(List<int?> number in solvedGrid){
       if(number.first != null){
         line.add(number);
@@ -84,5 +84,10 @@ class Solver {
   List<List<int?>> getField() {
     return grid;
   }
+
+  List<List<List<int?>>> getOptions(){
+    return options;
+  }
+
 
 }
