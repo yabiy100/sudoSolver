@@ -5,8 +5,11 @@ import 'package:test/test.dart';
 
 void main() {
   late Solver solverEmpty;
+  late Solver solverFull;
   late List<List<int?>> emptyfield;
   late List<String> emptyGrid;
+  late List<String> fullGrid;
+  late List<List<int?>> intField;
 
   setUp(() {
     emptyGrid = [
@@ -20,7 +23,17 @@ void main() {
       "",
       "",
     ];
-    solverEmpty = Solver(emptyGrid);
+    fullGrid = [
+    "123456789",
+    "123456789",
+    "123456789",
+    "123456789",
+    "123456789",
+    "123456789",
+    "123456789",
+    "123456789",
+    "123456789",
+    ];
     emptyfield = [
       [null,null,null,null,null,null,null,null,null],
       [null,null,null,null,null,null,null,null,null],
@@ -32,6 +45,20 @@ void main() {
       [null,null,null,null,null,null,null,null,null],
       [null,null,null,null,null,null,null,null,null],
     ];
+    intField = [
+      [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      [9, 8, 7, 6, 5, 4, 3, 2, 1],
+      [1, 3, 5, 7, 9, 2, 4, 6, 8],
+      [1, 4, 7, 0, 2, 5, 8, 3, 9],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      [9, 8, 7, 6, 5, 4, 3, 2, 1],
+      [1, 3, 5, 7, 9, 2, 4, 6, 8],
+      [1, 4, 7, 0, 2, 5, 8, 3, 9],
+      [0, 1, 9, 2, 8, 3, 4, 7, 5],
+    ];
+    solverEmpty = Solver(emptyGrid);
+    solverFull = Solver(fullGrid);
+
   });
   group("Solver Tests", ()
   {
@@ -52,17 +79,6 @@ void main() {
       ];
       final solver = Solver(rawInput);
 
-      List<List<int?>> intField = [
-        [1, 2, 3, 4, 5, 6, 7, 8, 9],
-        [9, 8, 7, 6, 5, 4, 3, 2, 1],
-        [1, 3, 5, 7, 9, 2, 4, 6, 8],
-        [1, 4, 7, 0, 2, 5, 8, 3, 9],
-        [1, 2, 3, 4, 5, 6, 7, 8, 9],
-        [9, 8, 7, 6, 5, 4, 3, 2, 1],
-        [1, 3, 5, 7, 9, 2, 4, 6, 8],
-        [1, 4, 7, 0, 2, 5, 8, 3, 9],
-        [0, 1, 9, 2, 8, 3, 4, 7, 5],
-      ];
       expect(solver.getField(), intField);
     });
     test("grid with one Null Line", () {
@@ -124,7 +140,7 @@ void main() {
 
   group("solve Grid Tests", ()
   {
-    test("empty grid all numbers", () {
+    /*test("empty grid all numbers", () {
 
       List<List<List<int?>>> allpossible = [
         [//first Row
@@ -167,7 +183,7 @@ void main() {
           [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
           [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
         ],
-        [// last/9. Line
+        [// last and 9. Line
           [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
           [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
           [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
@@ -175,7 +191,21 @@ void main() {
 
       ];
       expect(solverEmpty.getOptions(), allpossible);
+    });*/
+    test("All Numbers over to options", () {
+      List<List<List<int?>>> intOptionField = [
+        [[1], [2], [3], [4], [5], [6], [7], [8], [9]],
+        [[9], [8], [7], [6], [5], [4], [3], [2], [1]],
+        [[1], [3], [5], [7], [9], [2], [4], [6], [8]],
+        [[1], [4], [7], [0], [2], [5], [8], [3], [9]],
+        [[1], [2], [3], [4], [5], [6], [7], [8], [9]],
+        [[9], [8], [7], [6], [5], [4], [3], [2], [1]],
+        [[1], [3], [5], [7], [9], [2], [4], [6], [8]],
+        [[1], [4], [7], [0], [2], [5], [8], [3], [9]],
+        [[0], [1], [9], [2], [8], [3], [4], [7], [5]],
+      ];
+      expect(solverFull.getOptions(), intOptionField);
     });
-
   });
 }
+

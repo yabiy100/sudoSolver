@@ -6,17 +6,14 @@ class Solver {
 
   Solver(List<String> rawInput){
     transformToGrid(rawInput);
-    printGrid();
     copyStartGridToOptions();
   }
 
   void transformToGrid(List<String> rawInput) {
-    print(rawInput);
     for(String line in rawInput){
       List<int?> intLine = [];
-      //if the hole line is empty fill it with 9 null entries
       if(line.isEmpty){
-        intLine = List.filled(9, null);
+        intLine = List.filled(9, null); // fill empty line with 9 times null
         grid.add(intLine);
       }else {
         //Analyze each Character of each Line
@@ -43,18 +40,19 @@ class Solver {
       List<int?> allNumbers = [0,1,2,3,4,5,6,7,8,9];
       calculateOptionsInLine(allNumbers);
       for(List<int?> field in line){
-        if(field == null){
+        if(field.isNotEmpty){
           field.addAll(allNumbers);
         }
       }
     }
-    //print(options);
 
 
   }
 
   void calculateOptionsInLine(List<dynamic> allNumbers) {
-    for(List<int?> field in solvedGrid){
+    // Copy over the numbers of the grid to the options
+    // Leave fields empty that have no number
+    for(List<int?> field in grid){
       int? number = field.firstOrNull;
       if(number != null){
         allNumbers.remove(number);
@@ -63,6 +61,17 @@ class Solver {
   }
 
   void copyStartGridToOptions() {
+    // the
+    for(List<int?> line in solvedGrid){
+      List<int?> toAdd = [];
+      for(int? number in line){
+        toAdd.add(number);
+      }
+
+    }
+
+
+
     List<List<int?>> line = [];
     for(List<int?> number in solvedGrid){
       if(number.first != null){
@@ -72,7 +81,6 @@ class Solver {
       }
     }
     options.add(line);
-    //print("solved: $options" );
   }
 
   void printGrid(){
