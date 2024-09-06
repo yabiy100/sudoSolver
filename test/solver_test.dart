@@ -4,69 +4,42 @@ import 'package:sudoku_solver/data/repositories/solver.dart';
 import 'package:test/test.dart';
 
 void main() {
-  late Solver solverEmpty;
-  late Solver solverFull;
-  late List<List<int?>> emptyfield;
-  late List<String> emptyGrid;
-  late List<String> fullGrid;
-  late List<List<int?>> intField;
-
   setUp(() {
-    emptyGrid = [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-    ];
-    fullGrid = [
-    "123456789",
-    "123456789",
-    "123456789",
-    "123456789",
-    "123456789",
-    "123456789",
-    "123456789",
-    "123456789",
-    "123456789",
-    ];
-    emptyfield = [
-      [null,null,null,null,null,null,null,null,null],
-      [null,null,null,null,null,null,null,null,null],
-      [null,null,null,null,null,null,null,null,null],
-      [null,null,null,null,null,null,null,null,null],
-      [null,null,null,null,null,null,null,null,null],
-      [null,null,null,null,null,null,null,null,null],
-      [null,null,null,null,null,null,null,null,null],
-      [null,null,null,null,null,null,null,null,null],
-      [null,null,null,null,null,null,null,null,null],
-    ];
-    intField = [
-      [1, 2, 3, 4, 5, 6, 7, 8, 9],
-      [9, 8, 7, 6, 5, 4, 3, 2, 1],
-      [1, 3, 5, 7, 9, 2, 4, 6, 8],
-      [1, 4, 7, 0, 2, 5, 8, 3, 9],
-      [1, 2, 3, 4, 5, 6, 7, 8, 9],
-      [9, 8, 7, 6, 5, 4, 3, 2, 1],
-      [1, 3, 5, 7, 9, 2, 4, 6, 8],
-      [1, 4, 7, 0, 2, 5, 8, 3, 9],
-      [0, 1, 9, 2, 8, 3, 4, 7, 5],
-    ];
-    solverEmpty = Solver(emptyGrid);
-    solverFull = Solver(fullGrid);
 
   });
   group("Solver Tests", ()
   {
     test("Everything Empty", () {
+      //Arange
+      List<String> emptyGrid = [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+      ];
+      List<List<int?>> emptyfield = [
+        [null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null,null],
+      ];
+      //Act
+      Solver solverEmpty = Solver(emptyGrid);
+      //Accept
       expect(solverEmpty.getField(), emptyfield);
     });
     test("grid with just numbers", () {
-      List<String> rawInput = [
+      List<String> fullInput = [
         "123456789",
         "987654321",
         "135792468",
@@ -77,12 +50,23 @@ void main() {
         "147025839",
         "019283475",
       ];
-      final solver = Solver(rawInput);
+      List<List<int?>> fullField = [
+        [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        [9, 8, 7, 6, 5, 4, 3, 2, 1],
+        [1, 3, 5, 7, 9, 2, 4, 6, 8],
+        [1, 4, 7, 0, 2, 5, 8, 3, 9],
+        [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        [9, 8, 7, 6, 5, 4, 3, 2, 1],
+        [1, 3, 5, 7, 9, 2, 4, 6, 8],
+        [1, 4, 7, 0, 2, 5, 8, 3, 9],
+        [0, 1, 9, 2, 8, 3, 4, 7, 5],
+      ];
 
-      expect(solver.getField(), intField);
+     Solver solverFull = Solver(fullInput);
+      expect(solverFull.getField(), fullField);
     });
     test("grid with one Null Line", () {
-      List<String> rawInput = [
+      List<String> oneLineEmptyInput = [
         "123456789",
         "987654321",
         "",
@@ -93,8 +77,7 @@ void main() {
         "147025839",
         "019283475",
       ];
-      final solver = Solver(rawInput);
-
+      Solver oneLineEmptySolver = Solver(oneLineEmptyInput);
       List<List<int?>> intField = [
         [1, 2, 3, 4, 5, 6, 7, 8, 9],
         [9, 8, 7, 6, 5, 4, 3, 2, 1],
@@ -106,7 +89,7 @@ void main() {
         [1, 4, 7, 0, 2, 5, 8, 3, 9],
         [0, 1, 9, 2, 8, 3, 4, 7, 5],
       ];
-      expect(solver.getField(), intField);
+      expect(oneLineEmptySolver.getField(), intField);
     });
 
     test("grid with Spaces and .", () {
@@ -204,7 +187,19 @@ void main() {
         [[1], [4], [7], [0], [2], [5], [8], [3], [9]],
         [[0], [1], [9], [2], [8], [3], [4], [7], [5]],
       ];
-      expect(solverFull.getOptions(), intOptionField);
+      List<String> fullInput = [
+        "123456789",
+        "987654321",
+        "135792468",
+        "147025839",
+        "123456789",
+        "987654321",
+        "135792468",
+        "147025839",
+        "019283475",
+      ];
+      Solver fullInputSolver = Solver(fullInput);
+      expect(fullInputSolver.getOptions(), intOptionField);
     });
   });
 }

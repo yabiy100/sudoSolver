@@ -62,10 +62,12 @@ class Solver {
 
   void copyStartGridToOptions() {
     // the
-    for(List<int?> line in solvedGrid){
-      List<int?> toAdd = [];
+    for(List<int?> line in grid){
       for(int? number in line){
-        toAdd.add(number);
+        List<List<int?>> lineToAdd = [];
+        List<int?> oneField = [number];
+        lineToAdd.add(oneField);
+        options.add(lineToAdd);
       }
 
     }
