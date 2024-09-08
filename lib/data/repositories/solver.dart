@@ -63,26 +63,14 @@ class Solver {
   void copyStartGridToOptions() {
     // the
     for(List<int?> line in grid){
+      List<List<int?>> lineToAdd = [];
       for(int? number in line){
-        List<List<int?>> lineToAdd = [];
         List<int?> oneField = [number];
         lineToAdd.add(oneField);
-        options.add(lineToAdd);
       }
+      options.add(lineToAdd);
 
     }
-
-
-
-    List<List<int?>> line = [];
-    for(List<int?> number in solvedGrid){
-      if(number.first != null){
-        line.add(number);
-      }else{
-        line.add(List.filled(9, null));
-      }
-    }
-    options.add(line);
   }
 
   void printGrid(){
