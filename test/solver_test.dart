@@ -206,7 +206,7 @@ void main() {
     {
       //Use first solved sudoku with empty numbers on the left side. Calculate
       //only bases one possiblyties in one line
-      test("left side line calc", () {
+      test("left side only horzontal", () {
         //Arange
         List<String> leftInput = [
           "6 3458297",
@@ -233,10 +233,44 @@ void main() {
         ];
         //Act
         leftSolver.copyStartGridToOptions();
-        leftSolver.calculateAllOptionens();
+        leftSolver.analyzeLine();
         //Assert
         expect(leftSolver.getOptions(), leftOptionField);
       });
+    });
+
+    //Use first solved sudoku with empty numbers on the left side. Calculate
+    //only bases one possiblyties in one line
+    test("left side orizontal and vertical", () {
+      //Arange
+      List<String> leftInput = [
+        "6 3458297",
+        "   319564",
+        " 4 267381",
+        "23 146758",
+        " 54982613",
+        "  6573429",
+        "3  621845",
+        "  8795132",
+        "5  834976",
+      ];
+      Solver leftSolver = Solver(leftInput);
+      List<List<List<int?>>> leftOptionField = [
+        [[6], [1], [3], [4], [5], [8], [2], [9], [7]],
+        [[7,8], [2,7,8], [2,7], [3], [1], [9], [5], [6], [4]],
+        [[9], [4], [5,9], [2], [6], [7], [3], [8], [1]],
+        [[2], [3], [9], [1], [4], [6], [7], [5], [8]],
+        [[7], [5], [4], [9], [8], [2], [6], [1], [3]],
+        [[1,8], [1,8], [6], [5], [7], [3], [4], [2], [9]],
+        [[3], [7,9], [7,9], [6], [2], [1], [8], [4], [5]],
+        [[4], [6], [8], [7], [9], [5], [1], [3], [2]],
+        [[5], [1,2], [1,2], [8], [3], [4], [9], [7], [6]],
+      ];
+      //Act
+      leftSolver.copyStartGridToOptions();
+      leftSolver.calculateAllOptionens();
+      //Assert
+      expect(leftSolver.getOptions(), leftOptionField);
     });
     /*test("empty grid all numbers", () {
 
