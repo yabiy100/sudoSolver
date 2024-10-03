@@ -36,11 +36,11 @@ class Solver {
     //in every empty field
     //printGrid();
     //printOptions();
-    analyzeLine();
-    analyzeColumn();
+    calculateLine();
+    calculateColumn();
   }
 
-  void analyzeLine() {
+  void calculateLine() {
     for(List<List<int?>> line in options){
       for(List<int?> field in line){
         if(field.first == null){
@@ -59,7 +59,7 @@ class Solver {
   }
 
 
-  void analyzeColumn() {
+  void calculateColumn() {
     for (int col = 0; col < lineSize; col++) {
       List<int?> columnNumbers = getColumn(col);
       for (int row = 0; row < lineSize; row++) {

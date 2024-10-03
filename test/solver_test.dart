@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 
 void main() {
   setUp(() {
-    //fully solved suddoku to copy from
+    //fully solved sudoku to copy from
     List<String> firstSudokuInput = [
       "613458297",
       "872319564",
@@ -17,7 +17,7 @@ void main() {
       "468795132",
       "521834976",
     ];
-    Solver firstSudoukuSolver = Solver(firstSudokuInput);
+    Solver firstSudokuSolver = Solver(firstSudokuInput);
     List<List<List<int?>>> fullOptionField = [
       [[6], [1], [3], [4], [5], [8], [2], [9], [7]],
       [[8], [7], [2], [3], [1], [9], [5], [6], [4]],
@@ -29,11 +29,23 @@ void main() {
       [[4], [6], [8], [7], [9], [5], [1], [3], [2]],
       [[5], [2], [1], [8], [3], [4], [9], [7], [6]],
     ];
+    List<List<List<int?>>> emptyField = [
+      [[], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+    ];
+
   });
   group("Raw Input to Field", ()
   {
     test("Everything Empty", () {
-      //Arange
+      //Arrange
       List<String> emptyGrid = [
         "",
         "",
@@ -45,7 +57,7 @@ void main() {
         "",
         "",
       ];
-      List<List<int?>> emptyfield = [
+      List<List<int?>> emptyField = [
         [null,null,null,null,null,null,null,null,null],
         [null,null,null,null,null,null,null,null,null],
         [null,null,null,null,null,null,null,null,null],
@@ -58,7 +70,7 @@ void main() {
       ];
       Solver solverEmpty = Solver(emptyGrid);
       //Accept
-      expect(solverEmpty.getField(), emptyfield);
+      expect(solverEmpty.getField(), emptyField);
     });
     test("grid with just numbers", () {
       List<String> fullInput = [
@@ -185,7 +197,7 @@ void main() {
         [[1], [null], [null], [0], [2], [null], [null], [3], [9]],
         [[0], [1], [9], [2], [8], [3], [4], [7], [5]],
       ];
-      List<String> somelinesEmptyInput = [
+      List<String> someLinesEmptyInput = [
         "123456789",
         "9.76543 1",
         "135792468",
@@ -196,7 +208,7 @@ void main() {
         "1  02..39",
         "019283475",
       ];
-      Solver fullInputSolver = Solver(somelinesEmptyInput);
+      Solver fullInputSolver = Solver(someLinesEmptyInput);
       //Act
       fullInputSolver.copyStartGridToOptions();
       //Accept
@@ -205,9 +217,9 @@ void main() {
     group("Calculate Options", ()
     {
       //Use first solved sudoku with empty numbers on the left side. Calculate
-      //only bases one possiblyties in one line
-      test("left side only horzontal", () {
-        //Arange
+      //only bases one possibilities in one line
+      test("left side only horizontal", () {
+        //Arrange
         List<String> leftInput = [
           "6 3458297",
           "   319564",
@@ -233,45 +245,47 @@ void main() {
         ];
         //Act
         leftSolver.copyStartGridToOptions();
-        leftSolver.analyzeLine();
+        leftSolver.calculateLine();
         //Assert
         expect(leftSolver.getOptions(), leftOptionField);
       });
     });
 
     //Use first solved sudoku with empty numbers on the left side. Calculate
-    //only bases one possiblyties in one line
-    test("left side orizontal and vertical", () {
-      //Arange
-      List<String> leftInput = [
-        "6 3458297",
-        "   319564",
-        " 4 267381",
-        "23 146758",
-        " 54982613",
-        "  6573429",
-        "3  621845",
-        "  8795132",
-        "5  834976",
+    //only bases one possibilities in one line
+    test("lines only", () {
+      //Arrange
+      List<String> firstSudoku = [
+        "4 5678   ",
+        "978321456",
+        "6 1 957 3",
+        "2   869  ",
+        "896714 35",
+        "  7 3264 ",
+        "5 42 3  7",
+        "3 9847 1 ",
+        "    5 3  ",
       ];
-      Solver leftSolver = Solver(leftInput);
-      List<List<List<int?>>> leftOptionField = [
-        [[6], [1], [3], [4], [5], [8], [2], [9], [7]],
-        [[7,8], [2,7,8], [2,7], [3], [1], [9], [5], [6], [4]],
-        [[9], [4], [5,9], [2], [6], [7], [3], [8], [1]],
-        [[2], [3], [9], [1], [4], [6], [7], [5], [8]],
-        [[7], [5], [4], [9], [8], [2], [6], [1], [3]],
-        [[1,8], [1,8], [6], [5], [7], [3], [4], [2], [9]],
-        [[3], [7,9], [7,9], [6], [2], [1], [8], [4], [5]],
-        [[4], [6], [8], [7], [9], [5], [1], [3], [2]],
-        [[5], [1,2], [1,2], [8], [3], [4], [9], [7], [6]],
+      Solver firstRealSolver = Solver(firstSudoku);
+      List<List<List<int?>>> firstSudokuOptions = [
+        [[4], [1, 2, 3, 9], [5], [6], [7], [8], [1, 2, 3, 9], [1, 2, 3, 9], [1, 2, 3, 9]],
+        [[9], [7], [8], [3], [2], [1], [4], [5], [6]],
+        [[6], [2, 4,8], [1], [2, 4, 8], [9], [5], [7], [2, 4, 8], [3]],
+        [[2], [1, 3, 4, 5, 7], [1, 3, 4, 5, 7],  [1, 3, 4, 5, 7], [8], [6], [9],[ 1, 3, 4, 5, 7], [1, 3, 4, 5, 7]],
+        [[8], [9], [6], [7], [1], [4], [2], [3], [5]],
+        [[1, 5, 8, 9], [1, 5, 8, 9], [7], [1, 5, 8, 9 ], [3], [2], [6], [4], [1, 5, 8, 9]],
+        [[5], [1, 6, 8, 9], [4], [2], [1, 6, 8, 9], [3], [1, 6, 8, 9], [1, 6, 8, 9], [7]],
+        [[3], [2, 5, 6], [9], [8], [4], [7], [2, 5, 6], [1], [2, 5, 6]],
+        [[1, 2, 4, 6, 7, 8, 9], [1, 2, 4, 6, 7, 8, 9], [1, 2, 4, 6, 7, 8, 9], [1, 2, 4, 6, 7, 8, 9], [5], [1, 2, 4, 6, 7, 8, 9], [3], [1, 2, 4, 6, 7, 8, 9], [1, 2, 4, 6, 7, 8, 9],]
       ];
       //Act
-      leftSolver.copyStartGridToOptions();
-      leftSolver.calculateAllOptionens();
+      firstRealSolver.copyStartGridToOptions();
+      firstRealSolver.calculateLine();
       //Assert
-      expect(leftSolver.getOptions(), leftOptionField);
+      expect(firstRealSolver.getOptions(), firstSudokuOptions);
     });
+
+
     /*test("empty grid all numbers", () {
 
       List<String> emptyGrid = [
