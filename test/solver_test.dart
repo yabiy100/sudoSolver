@@ -285,6 +285,38 @@ void main() {
       expect(firstRealSolver.getOptions(), firstSudokuOptions);
     });
 
+    test("lines and horizontal", () {
+      //Arrange
+      List<String> firstSudoku = [
+        "4 5678   ",
+        "978321456",
+        "6 1 957 3",
+        "2   869  ",
+        "896714 35",
+        "  7 3264 ",
+        "5 42 3  7",
+        "3 9847 1 ",
+        "    5 3  ",
+      ];
+      Solver firstRealSolver = Solver(firstSudoku);
+      List<List<List<int?>>> firstSudokuOptions = [
+        [[4],                   [1, 2, 3],             [5],              [6],             [7],           [8],                   [1, 2],                   [2, 9],                [1, 2, 9]],
+        [[9],                   [7],                   [8],              [3],             [2],           [1],                   [4],                      [5],                   [6]],
+        [[6],                   [2, 4,8],              [1],              [4],             [9],           [5],                   [7],                      [2, 8],                [3]],
+        [[2],                   [1, 3, 4, 5],          [3],              [1, 4, 5],       [8],           [6],                   [9],                      [7],                   [1, 4]],
+        [[8],                   [9],                   [6],              [7],             [1],           [4],                   [2],                      [3],                   [5]],
+        [[1],                   [1, 5, 8],             [7],              [1, 5, 9 ],      [3],           [2],                   [6],                      [4],                   [1, 8, 9]],
+        [[5],                   [1, 6, 8],             [4],              [2],             [6],           [3],                   [1, 8],                   [6, 8, 9],             [7]],
+        [[3],                   [2, 5, 6],             [9],              [8],             [4],           [7],                   [2, 5],                   [1],                   [2]],
+        [[1,7],                 [1, 2, 4, 6, 8],       [2],              [1, 4, 9],       [5],           [9],                   [3],                      [2, 6, 7, 8, 9],       [1, 2, 4, 8, 9],]
+      ];
+      //Act
+      firstRealSolver.copyStartGridToOptions();
+      firstRealSolver.calculateLine();
+      firstRealSolver.calculateColumn();
+      //Assert
+      expect(firstRealSolver.getOptions(), firstSudokuOptions);
+    });
 
     /*test("empty grid all numbers", () {
 
