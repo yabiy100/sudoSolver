@@ -73,7 +73,7 @@ void main() {
         ];
         //Act
         leftSolver.copyStartGridToOptions();
-        leftSolver.calculateLine();
+        leftSolver.calculateLineFirst();
         //Assert
         expect(leftSolver.getOptions(), leftOptionField);
       });
@@ -108,7 +108,7 @@ void main() {
       ];
       //Act
       firstRealSolver.copyStartGridToOptions();
-      firstRealSolver.calculateLine();
+      firstRealSolver.calculateLineFirst();
       //Assert
       expect(firstRealSolver.getOptions(), firstSudokuOptions);
     });
@@ -140,7 +140,7 @@ void main() {
       ];
       //Act
       firstRealSolver.copyStartGridToOptions();
-      firstRealSolver.calculateLine();
+      firstRealSolver.calculateLineFirst();
       firstRealSolver.calculateColumn();
       //Assert
       expect(firstRealSolver.getOptions(), firstSudokuOptions);
@@ -172,7 +172,7 @@ void main() {
       ];
       //Act
       loopSolver.copyStartGridToOptions();
-      loopSolver.calculateLine();
+      loopSolver.calculateLineFirst();
       loopSolver.calculateColumn();
       loopSolver.calculateSquare();
       //Assert
@@ -205,7 +205,7 @@ void main() {
       ];
       //Act
       onceSolver.copyStartGridToOptions();
-      onceSolver.calculateLine();
+      onceSolver.calculateLineFirst();
       onceSolver.calculateColumn();
       onceSolver.calculateSquare();
       //Assert

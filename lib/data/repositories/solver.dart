@@ -35,19 +35,32 @@ class Solver {
   void calculateAllOptionens(){
     while(changed == true){
       changed = false;
-      calculateLine();
+      calculateLineFirst();
       calculateColumn();
       calculateSquare();
     }
   }
 
-  void calculateLine() {
+  void calculateLineFirst() {
+    calculateLineLater(true);
+  }
+
+  void calculateLine(){
+    calculateLineLater(false);
+  }
+
+  void calculateLineLater(bool first) {
     for(List<List<int?>> line in options){
       for(List<int?> field in line){
         if(field.first == null){
           changed = true;
           field.remove(null);
-          List<int?> allNumbers = [1,2,3,4,5,6,7,8,9];
+          List<int?> allNumbers = [];
+          if(first){
+            allNumbers = [1,2,3,4,5,6,7,8,9];
+          }else{
+            allNumbers = field;
+          }
           //remove all numbers that are in a line to get remaining options
           for(List<int?> fullfield in line){
             if(fullfield.length == 1){
@@ -66,17 +79,17 @@ class Solver {
       List<int?> columnNumbers = getColumn(col);
       for (int row = 0; row < lineSize; row++) {
         List<int?> field = options[row][col];
-        if (field.first == null) {
+        if (field.first == null || field.length > 1) {
           changed = true;
           field.remove(null);
-          List<int?> allNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+          List<int?> allNumbers = options[row][col];
           // Remove numbers already present in the column
           for (int? num in columnNumbers) {
             if (num != null) {
               allNumbers.remove(num);
             }
           }
-          field.addAll(allNumbers);
+          options[row][col] = allNumbers;
         }
         if(field.length > 1){
           List<int?> allNumbers = options[row][col];
