@@ -42,178 +42,6 @@ void main() {
     ];
 
   });
-  group("Raw Input to Field", ()
-  {
-    test("Everything Empty", () {
-      //Arrange
-      List<String> emptyGrid = [
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-      ];
-      List<List<int?>> emptyField = [
-        [null,null,null,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,null],
-      ];
-      Solver solverEmpty = Solver(emptyGrid);
-      //Accept
-      expect(solverEmpty.getField(), emptyField);
-    });
-    test("grid with just numbers", () {
-      List<String> fullInput = [
-        "123456789",
-        "987654321",
-        "135792468",
-        "147025839",
-        "123456789",
-        "987654321",
-        "135792468",
-        "147025839",
-        "019283475",
-      ];
-      List<List<int?>> fullField = [
-        [1, 2, 3, 4, 5, 6, 7, 8, 9],
-        [9, 8, 7, 6, 5, 4, 3, 2, 1],
-        [1, 3, 5, 7, 9, 2, 4, 6, 8],
-        [1, 4, 7, 0, 2, 5, 8, 3, 9],
-        [1, 2, 3, 4, 5, 6, 7, 8, 9],
-        [9, 8, 7, 6, 5, 4, 3, 2, 1],
-        [1, 3, 5, 7, 9, 2, 4, 6, 8],
-        [1, 4, 7, 0, 2, 5, 8, 3, 9],
-        [0, 1, 9, 2, 8, 3, 4, 7, 5],
-      ];
-
-     Solver solverFull = Solver(fullInput);
-      expect(solverFull.getField(), fullField);
-    });
-    test("grid with one Null Line", () {
-      List<String> oneLineEmptyInput = [
-        "123456789",
-        "987654321",
-        "",
-        "147025839",
-        "123456789",
-        "987654321",
-        "135792468",
-        "147025839",
-        "019283475",
-      ];
-      Solver oneLineEmptySolver = Solver(oneLineEmptyInput);
-      List<List<int?>> intField = [
-        [1, 2, 3, 4, 5, 6, 7, 8, 9],
-        [9, 8, 7, 6, 5, 4, 3, 2, 1],
-        [null, null, null, null, null, null, null, null, null],
-        [1, 4, 7, 0, 2, 5, 8, 3, 9],
-        [1, 2, 3, 4, 5, 6, 7, 8, 9],
-        [9, 8, 7, 6, 5, 4, 3, 2, 1],
-        [1, 3, 5, 7, 9, 2, 4, 6, 8],
-        [1, 4, 7, 0, 2, 5, 8, 3, 9],
-        [0, 1, 9, 2, 8, 3, 4, 7, 5],
-      ];
-      expect(oneLineEmptySolver.getField(), intField);
-    });
-
-    test("grid with Spaces and .", () {
-      List<String> rawInput = [
-        "12 45 789",
-        "98.654.21",
-        "",
-        "147025839",
-        "",
-        "987654321",
-        "135792468",
-        "147025839",
-        "019283475",
-      ];
-      final solver = Solver(rawInput);
-
-      List<List<int?>> intField = [
-        [1, 2, null, 4, 5, null, 7, 8, 9],
-        [9, 8, null, 6, 5, 4, null, 2, 1],
-        [null, null, null, null, null, null, null, null, null],
-        [1, 4, 7, 0, 2, 5, 8, 3, 9],
-        [null, null, null, null, null, null, null, null, null],
-        [9, 8, 7, 6, 5, 4, 3, 2, 1],
-        [1, 3, 5, 7, 9, 2, 4, 6, 8],
-        [1, 4, 7, 0, 2, 5, 8, 3, 9],
-        [0, 1, 9, 2, 8, 3, 4, 7, 5],
-      ];
-      expect(solver.getField(), intField);
-    });
-  });
-
-  group("Grid to Options", ()
-  {
-    test("All Numbers over to options", () {
-      List<List<List<int?>>> intOptionField = [
-        [[1], [2], [3], [4], [5], [6], [7], [8], [9]],
-        [[9], [8], [7], [6], [5], [4], [3], [2], [1]],
-        [[1], [3], [5], [7], [9], [2], [4], [6], [8]],
-        [[1], [4], [7], [0], [2], [5], [8], [3], [9]],
-        [[1], [2], [3], [4], [5], [6], [7], [8], [9]],
-        [[9], [8], [7], [6], [5], [4], [3], [2], [1]],
-        [[1], [3], [5], [7], [9], [2], [4], [6], [8]],
-        [[1], [4], [7], [0], [2], [5], [8], [3], [9]],
-        [[0], [1], [9], [2], [8], [3], [4], [7], [5]],
-      ];
-      List<String> fullInput = [
-        "123456789",
-        "987654321",
-        "135792468",
-        "147025839",
-        "123456789",
-        "987654321",
-        "135792468",
-        "147025839",
-        "019283475",
-      ];
-      Solver fullInputSolver = Solver(fullInput);
-      fullInputSolver.copyStartGridToOptions();
-      expect(fullInputSolver.getOptions(), intOptionField);
-    });
-    test("Some empty", (){
-      //Assert
-      List<List<List<int?>>> intOptionField = [
-        [[1], [2], [3], [4], [5], [6], [7], [8], [9]],
-        [[9], [null], [7], [6], [5], [4], [3], [null], [1]],
-        [[1], [3], [5], [7], [9], [2], [4], [6], [8]],
-        [[null], [null], [null], [null], [null], [null], [null], [null], [null]],
-        [[1], [2], [3], [4], [5], [6], [7], [8], [9]],
-        [[9], [null], [null], [null], [null], [null], [null], [null], [1]],
-        [[1], [3], [5], [7], [9], [2], [4], [6], [8]],
-        [[1], [null], [null], [0], [2], [null], [null], [3], [9]],
-        [[0], [1], [9], [2], [8], [3], [4], [7], [5]],
-      ];
-      List<String> someLinesEmptyInput = [
-        "123456789",
-        "9.76543 1",
-        "135792468",
-        "",
-        "123456789",
-        "9 . . . 1",
-        "135792468",
-        "1  02..39",
-        "019283475",
-      ];
-      Solver fullInputSolver = Solver(someLinesEmptyInput);
-      //Act
-      fullInputSolver.copyStartGridToOptions();
-      //Accept
-      expect(fullInputSolver.getOptions(), intOptionField);
-    });
     group("Calculate Options", ()
     {
       //Use first solved sudoku with empty numbers on the left side. Calculate
@@ -317,71 +145,71 @@ void main() {
       //Assert
       expect(firstRealSolver.getOptions(), firstSudokuOptions);
     });
-
-    /*test("empty grid all numbers", () {
-
-      List<String> emptyGrid = [
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
+    test("lines horzontal quare test until end", (){
+      //Arrange
+      List<String> firstSudoku = [
+        "4 5678   ",
+        "978321456",
+        "6 1 957 3",
+        "2   869  ",
+        "896714 35",
+        "  7 3264 ",
+        "5 42 3  7",
+        "3 9847 1 ",
+        "    5 3  ",
       ];
-      Solver solverEmpty = Solver(emptyGrid);
-
-      List<List<List<int?>>> allpossible = [
-        [//first Row
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-        ],
-        [
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-        ],
-        [
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-        ],
-        [
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-        ],
-        [
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-        ],
-        [
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-        ],
-        [
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-        ],
-        [
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-        ],
-        [// last and 9. Line
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-          [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-        ],
+      Solver loopSolver = Solver(firstSudoku);
+      List<List<List<int?>>> allOnceOptions = [
+        [[4],                   [3],                   [5],              [6],             [7],           [8],                   [1],                      [9],                   [9]],
+        [[9],                   [7],                   [8],              [3],             [2],           [1],                   [4],                      [5],                   [6]],
+        [[6],                   [2],                   [1],              [4],             [9],           [5],                   [7],                      [8],                   [3]],
+        [[2],                   [4],                   [3],              [5],             [8],           [6],                   [9],                      [7],                   [1]],
+        [[8],                   [9],                   [6],              [7],             [1],           [4],                   [2],                      [3],                   [5]],
+        [[1],                   [5],                   [7],              [9],             [3],           [2],                   [6],                      [4],                   [8]],
+        [[5],                   [1],                   [4],              [2],             [6],           [3],                   [8],                      [9],                   [7]],
+        [[3],                   [6],                   [9],              [8],             [4],           [7],                   [5],                      [1],                   [2]],
+        [[7],                   [8],                   [2],              [1],             [5],           [9],                   [3],                      [6],                   [4]]
       ];
-      expect(solverEmpty.getOptions(), allpossible);
-    });*/
-  });
+      //Act
+      loopSolver.copyStartGridToOptions();
+      loopSolver.calculateLine();
+      loopSolver.calculateColumn();
+      loopSolver.calculateSquare();
+      //Assert
+      expect(loopSolver.getOptions(), allOnceOptions);
+    });
+    test("lines horzontal quare test once", (){
+      //Arrange
+      List<String> firstSudoku = [
+        "4 5678   ",
+        "978321456",
+        "6 1 957 3",
+        "2   869  ",
+        "896714 35",
+        "  7 3264 ",
+        "5 42 3  7",
+        "3 9847 1 ",
+        "    5 3  ",
+      ];
+      Solver onceSolver = Solver(firstSudoku);
+      List<List<List<int?>>> allOnceOptions = [
+        [[4],                   [2, 3],                [5],              [6],             [7],           [8],                   [1, 2],                   [2, 9],                [1, 2, 9]],
+        [[9],                   [7],                   [8],              [3],             [2],           [1],                   [4],                      [5],                   [6]],
+        [[6],                   [2],                   [1],              [4],             [9],           [5],                   [7],                      [2, 8],                [3]],
+        [[2],                   [4, 5],                [3],              [5],             [8],           [6],                   [9],                      [7],                   [1]],
+        [[8],                   [9],                   [6],              [7],             [1],           [4],                   [2],                      [3],                   [5]],
+        [[1],                   [5],                   [7],              [5, 9],          [3],           [2],                   [6],                      [4],                   [1, 8]],
+        [[5],                   [1, 6, 8],             [4],              [2],             [6],           [3],                   [8],                      [6, 8, 9],             [7]],
+        [[3],                   [6],                   [9],              [8],             [4],           [7],                   [5],                      [1],                   [2]],
+        [[1,7],                 [1, 6, 8],             [2],              [1],             [5],           [9],                   [3],                      [ 6, 8, 9],            [4, 8, 9],]
+      ];
+      //Act
+      onceSolver.copyStartGridToOptions();
+      onceSolver.calculateLine();
+      onceSolver.calculateColumn();
+      onceSolver.calculateSquare();
+      //Assert
+      expect(onceSolver.getOptions(), allOnceOptions);
+    });
 }
 
