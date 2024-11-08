@@ -6,7 +6,7 @@ import 'package:test/test.dart';
 void main() {
   setUp(() {
     //fully solved sudoku to copy from
-    List<String> firstSudokuInput = [
+    /*List<String> firstSudokuInput = [
       "613458297",
       "872319564",
       "945267381",
@@ -40,13 +40,13 @@ void main() {
       [[], [], [], [], [], [], [], [], []],
       [[], [], [], [], [], [], [], [], []],
     ];
-
+    */
   });
     group("Calculate Options", ()
     {
       //Use first solved sudoku with empty numbers on the left side. Calculate
       //only bases one possibilities in one line
-      test("left side only horizontal", () {
+      test("left side only lines", () {
         //Arrange
         List<String> leftInput = [
           "603458297",
@@ -73,7 +73,7 @@ void main() {
         ];
         //Act
         leftSolver.copyStartGridToOptions();
-        leftSolver.calculateLineFirst();
+        leftSolver.calculateLine();
         //Assert
         expect(leftSolver.getOptions(), leftOptionField);
       });
@@ -108,7 +108,7 @@ void main() {
       ];
       //Act
       firstRealSolver.copyStartGridToOptions();
-      firstRealSolver.calculateLineFirst();
+      firstRealSolver.calculateLine();
       //Assert
       expect(firstRealSolver.getOptions(), firstSudokuOptions);
     });
@@ -140,7 +140,7 @@ void main() {
       ];
       //Act
       firstRealSolver.copyStartGridToOptions();
-      firstRealSolver.calculateLineFirst();
+      firstRealSolver.calculateLine();
       firstRealSolver.calculateColumn();
       //Assert
       expect(firstRealSolver.getOptions(), firstSudokuOptions);
@@ -203,7 +203,7 @@ void main() {
       ];
       //Act
       onceSolver.copyStartGridToOptions();
-      onceSolver.calculateLineFirst();
+      onceSolver.calculateLine();
       onceSolver.calculateColumn();
       onceSolver.calculateSquare();
       //Assert

@@ -33,7 +33,6 @@ class Solver {
     grid.add(intLine);
   }
   void calculateAllOptionens(){
-    calculateLineFirst();
     while(changed == true){
       changed = false;
       calculateLine();
@@ -42,34 +41,23 @@ class Solver {
     }
   }
 
-  void calculateLineFirst() {
-    //in first run use all numbers from 1-9 as option
-    calculateLineLater(true);
-  }
 
-  void calculateLine(){
-    calculateLineLater(false);
-  }
 
-  void calculateLineLater(bool first) {
-    for(List<List<int?>> line in options){
-      for(List<int?> field in line){
-        if(field.first == 0 || field.length > 1){
+  void calculateLine() {
+    for (int row = 0; row < lineSize; row++) {
+      for (int col = 0; col < lineSize; col++) {
+        List<int?> field = options[row][col];
+        //If field is empthy calculate remaining options in line
+        if(field.first == 0){
           changed = true;
-          field.remove(null);
-          List<int?> allNumbers = [];
-          if(first){
-            allNumbers = [1,2,3,4,5,6,7,8,9];
-          }else{
-            allNumbers = field;
-          }
-          //remove all numbers that are in a line to get remaining options
-          for(List<int?> fullfield in line){
-            if(fullfield.length == 1){
-              allNumbers.remove(fullfield.first);
+          field.remove(0);
+          List<int?> allNumbers = [1,2,3,4,5,6,7,8,9];
+          for(int i = 0; i < lineSize; i++){
+            if(options[row][i].length == 1){
+              allNumbers.remove(options[row][i].first);
             }
           }
-          field = allNumbers;
+          options[row][col] = allNumbers;
         }
       }
     }
