@@ -13,7 +13,7 @@ class Solver {
     for(String line in rawInput){
       List<int?> intLine = [];
       if(line.isEmpty){
-        intLine = List.filled(9, null); // fill empty line with 9 times null
+        intLine = List.filled(9, 0); // fill empty line with 9 times 0
         grid.add(intLine);
       }else {
         //Analyze each Character of each Line
@@ -24,8 +24,8 @@ class Solver {
 
   void transformEachNumber(String line, List<int?> intLine) {
     for(int i = 0; i < lineSize; i++){
-      if(line[i] == " " || line[i] == "."){
-        intLine.add(null);
+      if(line[i] == "0"){
+        intLine.add(0);
       }else{
         intLine.add(int.parse(line[i]));
       }
@@ -33,15 +33,17 @@ class Solver {
     grid.add(intLine);
   }
   void calculateAllOptionens(){
+    calculateLineFirst();
     while(changed == true){
       changed = false;
-      calculateLineFirst();
+      calculateLine();
       calculateColumn();
       calculateSquare();
     }
   }
 
   void calculateLineFirst() {
+    //in first run use all numbers from 1-9 as option
     calculateLineLater(true);
   }
 
@@ -52,7 +54,7 @@ class Solver {
   void calculateLineLater(bool first) {
     for(List<List<int?>> line in options){
       for(List<int?> field in line){
-        if(field.first == null){
+        if(field.first == 0 || field.length > 1){
           changed = true;
           field.remove(null);
           List<int?> allNumbers = [];
@@ -67,7 +69,7 @@ class Solver {
               allNumbers.remove(fullfield.first);
             }
           }
-          field.addAll(allNumbers);
+          field = allNumbers;
         }
       }
     }
@@ -79,9 +81,9 @@ class Solver {
       List<int?> columnNumbers = getColumn(col);
       for (int row = 0; row < lineSize; row++) {
         List<int?> field = options[row][col];
-        if (field.first == null || field.length > 1) {
+        if (field.first == 0 || field.length > 1) {
           changed = true;
-          field.remove(null);
+          field.remove(0);
           List<int?> allNumbers = options[row][col];
           // Remove numbers already present in the column
           for (int? num in columnNumbers) {
@@ -90,14 +92,6 @@ class Solver {
             }
           }
           options[row][col] = allNumbers;
-        }
-        if(field.length > 1){
-          List<int?> allNumbers = options[row][col];
-          for (int? num in columnNumbers) {
-            if (num != null) {
-              allNumbers.remove(num);
-            }
-          }
         }
       }
     }
@@ -121,7 +115,7 @@ class Solver {
           List<int?> allNumbers = options[row][col];
           //all Numbers that are already set in a sqaure;
           for (int? num in squareNumbers) {
-            if (num != null) {
+            if (num != 0) {
               allNumbers.remove(num);
             }
           }

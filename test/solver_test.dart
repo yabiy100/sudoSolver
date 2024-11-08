@@ -49,15 +49,15 @@ void main() {
       test("left side only horizontal", () {
         //Arrange
         List<String> leftInput = [
-          "6 3458297",
-          "   319564",
-          " 4 267381",
-          "23 146758",
-          " 54982613",
-          "  6573429",
-          "3  621845",
-          "  8795132",
-          "5  834976",
+          "603458297",
+          "000319564",
+          "040267381",
+          "230146758",
+          "054982613",
+          "006573429",
+          "300621845",
+          "008795132",
+          "500834976",
         ];
         Solver leftSolver = Solver(leftInput);
         List<List<List<int?>>> leftOptionField = [
@@ -84,15 +84,15 @@ void main() {
     test("lines only", () {
       //Arrange
       List<String> firstSudoku = [
-        "4 5678   ",
+        "405678000",
         "978321456",
-        "6 1 957 3",
-        "2   869  ",
-        "896714 35",
-        "  7 3264 ",
-        "5 42 3  7",
-        "3 9847 1 ",
-        "    5 3  ",
+        "601095703",
+        "200086900",
+        "896714035",
+        "007032640",
+        "504203007",
+        "309847010",
+        "000050300",
       ];
       Solver firstRealSolver = Solver(firstSudoku);
       List<List<List<int?>>> firstSudokuOptions = [
@@ -116,15 +116,15 @@ void main() {
     test("lines and horizontal", () {
       //Arrange
       List<String> firstSudoku = [
-        "4 5678   ",
+        "405678000",
         "978321456",
-        "6 1 957 3",
-        "2   869  ",
-        "896714 35",
-        "  7 3264 ",
-        "5 42 3  7",
-        "3 9847 1 ",
-        "    5 3  ",
+        "601095703",
+        "200086900",
+        "896714035",
+        "007032640",
+        "504203007",
+        "309847010",
+        "000050300",
       ];
       Solver firstRealSolver = Solver(firstSudoku);
       List<List<List<int?>>> firstSudokuOptions = [
@@ -148,15 +148,15 @@ void main() {
     test("lines horzontal quare test until end", (){
       //Arrange
       List<String> firstSudoku = [
-        "4 5678   ",
+        "405678000",
         "978321456",
-        "6 1 957 3",
-        "2   869  ",
-        "896714 35",
-        "  7 3264 ",
-        "5 42 3  7",
-        "3 9847 1 ",
-        "    5 3  ",
+        "601095703",
+        "200086900",
+        "896714035",
+        "007032640",
+        "504203007",
+        "309847010",
+        "000050300",
       ];
       Solver loopSolver = Solver(firstSudoku);
       List<List<List<int?>>> allOnceOptions = [
@@ -172,24 +172,22 @@ void main() {
       ];
       //Act
       loopSolver.copyStartGridToOptions();
-      loopSolver.calculateLineFirst();
-      loopSolver.calculateColumn();
-      loopSolver.calculateSquare();
+      loopSolver.calculateAllOptionens();
       //Assert
       expect(loopSolver.getOptions(), allOnceOptions);
     });
     test("lines horzontal quare test once", (){
       //Arrange
       List<String> firstSudoku = [
-        "4 5678   ",
+        "405678000",
         "978321456",
-        "6 1 957 3",
-        "2   869  ",
-        "896714 35",
-        "  7 3264 ",
-        "5 42 3  7",
-        "3 9847 1 ",
-        "    5 3  ",
+        "601095703",
+        "200086900",
+        "896714035",
+        "007032640",
+        "504203007",
+        "309847010",
+        "000050300",
       ];
       Solver onceSolver = Solver(firstSudoku);
       List<List<List<int?>>> allOnceOptions = [

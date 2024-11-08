@@ -20,15 +20,16 @@ void main() {
         "",
       ];
       List<List<int?>> emptyField = [
-        [null,null,null,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,null],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+
       ];
       Solver solverEmpty = Solver(emptyGrid);
       //Accept
@@ -65,7 +66,7 @@ void main() {
       List<String> oneLineEmptyInput = [
         "123456789",
         "987654321",
-        "",
+        "000000000",
         "147025839",
         "123456789",
         "987654321",
@@ -77,7 +78,7 @@ void main() {
       List<List<int?>> intField = [
         [1, 2, 3, 4, 5, 6, 7, 8, 9],
         [9, 8, 7, 6, 5, 4, 3, 2, 1],
-        [null, null, null, null, null, null, null, null, null],
+        [0,0,0,0,0,0,0,0,0],
         [1, 4, 7, 0, 2, 5, 8, 3, 9],
         [1, 2, 3, 4, 5, 6, 7, 8, 9],
         [9, 8, 7, 6, 5, 4, 3, 2, 1],
@@ -90,11 +91,11 @@ void main() {
 
     test("grid with Spaces and .", () {
       List<String> rawInput = [
-        "12 45 789",
-        "98.654.21",
-        "",
+        "120450789",
+        "980654021",
+        "000000000",
         "147025839",
-        "",
+        "000000000",
         "987654321",
         "135792468",
         "147025839",
@@ -103,11 +104,11 @@ void main() {
       final solver = Solver(rawInput);
 
       List<List<int?>> intField = [
-        [1, 2, null, 4, 5, null, 7, 8, 9],
-        [9, 8, null, 6, 5, 4, null, 2, 1],
-        [null, null, null, null, null, null, null, null, null],
+        [1, 2, 0, 4, 5, 0, 7, 8, 9],
+        [9, 8, 0, 6, 5, 4, 0, 2, 1],
+        [0,0,0,0,0,0,0,0,0],
         [1, 4, 7, 0, 2, 5, 8, 3, 9],
-        [null, null, null, null, null, null, null, null, null],
+        [0,0,0,0,0,0,0,0,0],
         [9, 8, 7, 6, 5, 4, 3, 2, 1],
         [1, 3, 5, 7, 9, 2, 4, 6, 8],
         [1, 4, 7, 0, 2, 5, 8, 3, 9],
@@ -149,24 +150,24 @@ void main() {
       //Assert
       List<List<List<int?>>> intOptionField = [
         [[1], [2], [3], [4], [5], [6], [7], [8], [9]],
-        [[9], [null], [7], [6], [5], [4], [3], [null], [1]],
+        [[9], [0], [7], [6], [5], [4], [3], [0], [1]],
         [[1], [3], [5], [7], [9], [2], [4], [6], [8]],
-        [[null], [null], [null], [null], [null], [null], [null], [null], [null]],
+        [[0], [0], [0], [0], [0], [0], [0], [0], [0]],
         [[1], [2], [3], [4], [5], [6], [7], [8], [9]],
-        [[9], [null], [null], [null], [null], [null], [null], [null], [1]],
+        [[9], [0], [0], [0], [0], [0], [0], [0], [1]],
         [[1], [3], [5], [7], [9], [2], [4], [6], [8]],
-        [[1], [null], [null], [0], [2], [null], [null], [3], [9]],
+        [[1], [0], [0], [0], [2], [0], [0], [3], [9]],
         [[0], [1], [9], [2], [8], [3], [4], [7], [5]],
       ];
       List<String> someLinesEmptyInput = [
         "123456789",
-        "9.76543 1",
+        "907654301",
         "135792468",
-        "",
+        "000000000",
         "123456789",
-        "9 . . . 1",
+        "900000001",
         "135792468",
-        "1  02..39",
+        "100020039",
         "019283475",
       ];
       Solver fullInputSolver = Solver(someLinesEmptyInput);
