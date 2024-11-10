@@ -19,7 +19,7 @@ void main() {
         "",
         "",
       ];
-      List<List<int?>> emptyField = [
+      List<List<int>> emptyField = [
         [0,0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0,0],
@@ -47,7 +47,7 @@ void main() {
         "147025839",
         "019283475",
       ];
-      List<List<int?>> fullField = [
+      List<List<int>> fullField = [
         [1, 2, 3, 4, 5, 6, 7, 8, 9],
         [9, 8, 7, 6, 5, 4, 3, 2, 1],
         [1, 3, 5, 7, 9, 2, 4, 6, 8],
@@ -75,7 +75,7 @@ void main() {
         "019283475",
       ];
       Solver oneLineEmptySolver = Solver(oneLineEmptyInput);
-      List<List<int?>> intField = [
+      List<List<int>> intField = [
         [1, 2, 3, 4, 5, 6, 7, 8, 9],
         [9, 8, 7, 6, 5, 4, 3, 2, 1],
         [0,0,0,0,0,0,0,0,0],
@@ -103,7 +103,7 @@ void main() {
       ];
       final solver = Solver(rawInput);
 
-      List<List<int?>> intField = [
+      List<List<int>> intField = [
         [1, 2, 0, 4, 5, 0, 7, 8, 9],
         [9, 8, 0, 6, 5, 4, 0, 2, 1],
         [0,0,0,0,0,0,0,0,0],
@@ -120,7 +120,7 @@ void main() {
   group("Grid to Options", ()
   {
     test("All Numbers over to options", () {
-      List<List<List<int?>>> intOptionField = [
+      List<List<List<int>>> intOptionField = [
         [[1], [2], [3], [4], [5], [6], [7], [8], [9]],
         [[9], [8], [7], [6], [5], [4], [3], [2], [1]],
         [[1], [3], [5], [7], [9], [2], [4], [6], [8]],
@@ -148,7 +148,7 @@ void main() {
     });
     test("Some empty", (){
       //Assert
-      List<List<List<int?>>> intOptionField = [
+      List<List<List<int>>> intOptionField = [
         [[1], [2], [3], [4], [5], [6], [7], [8], [9]],
         [[9], [0], [7], [6], [5], [4], [3], [0], [1]],
         [[1], [3], [5], [7], [9], [2], [4], [6], [8]],

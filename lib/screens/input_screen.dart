@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import "package:sudoku_solver/data/repositories/solver.dart";
-import "package:sudoku_solver/widgets/custom_button.dart";
 
 class InputScreen extends StatefulWidget {
   const InputScreen({super.key});
@@ -12,13 +11,14 @@ class InputScreen extends StatefulWidget {
 class _InputScreenState extends State<InputScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  RegExp regExp = RegExp(r'^[0-9\s.]+$');
+  RegExp regExp = RegExp(r'^[0-9]+$');
   List<String> lines = List.filled(9, "");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Enter in Sudoku"),
+        backgroundColor: const Color(0xffE29A4C),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -32,9 +32,22 @@ class _InputScreenState extends State<InputScreen> {
             key: _formKey,
             child: Column(
               children: <Widget>[
-                const Text(
-                  """Please Enter each line of your sudoku and use spaces or . for 
-                      empthy spots"""
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    double fontSize = constraints.maxWidth * 0.04; // Scales font size dynamically
+                    return Container(
+                      padding: const EdgeInsets.all(16),
+                      color: const Color(0xffE29A4C), // Matches AppBar background color
+                      child: Text(
+                        "Please enter each line of your Sudoku and use 0 for empty spots",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: fontSize.clamp(14, 20), // Ensures font size stays between 14 and 20
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 inputName("1.Line",0),
                 inputName("2.Line",1),
@@ -50,14 +63,19 @@ class _InputScreenState extends State<InputScreen> {
                   onPressed: () {
                     if (_formKey.currentState?.validate() ?? false) {
                       _formKey.currentState?.save();
-                      // You can now work with the `lines` list which holds the input data
                       print('Form is valid. Lines: $lines');
                     } else {
                       print('Form is not valid.');
                     }
-                    Solver Ysolver = new Solver(lines);
+                    Solver Ysolver = Solver(lines);
                   },
-                  child: Text('Calculate Solution'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xffE29A4C),
+                    foregroundColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    textStyle: const TextStyle(fontSize: 16),
+                  ),
+                  child: const Text('Calculate Solution'),
                 ),
 
               ],
@@ -65,6 +83,7 @@ class _InputScreenState extends State<InputScreen> {
           ),
         ),
       ),
+      backgroundColor: Colors.blue,
     );
   }
 
@@ -72,6 +91,8 @@ class _InputScreenState extends State<InputScreen> {
     return TextFormField(
       decoration: InputDecoration(
         labelText: label,
+        filled: true, // Enables the background color
+        fillColor: const Color(0xffE29A4C), // Sets the background color to blue
       ),
       validator: (value) {
         if(value == null || value.isEmpty){

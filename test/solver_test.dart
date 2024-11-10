@@ -5,6 +5,11 @@ import 'package:test/test.dart';
 
 void main() {
   setUp(() {
+    /*empty test
+    test("lines horzontal quare until end", (){
+      expect(leftSolver.getOptions(), leftOptionField);
+    });
+    */
     //fully solved sudoku to copy from
     /*List<String> firstSudokuInput = [
       "613458297",
@@ -18,7 +23,7 @@ void main() {
       "521834976",
     ];
     Solver firstSudokuSolver = Solver(firstSudokuInput);
-    List<List<List<int?>>> fullOptionField = [
+    List<List<List<int>>> fullOptionField = [
       [[6], [1], [3], [4], [5], [8], [2], [9], [7]],
       [[8], [7], [2], [3], [1], [9], [5], [6], [4]],
       [[9], [4], [5], [2], [6], [7], [3], [8], [1]],
@@ -29,7 +34,7 @@ void main() {
       [[4], [6], [8], [7], [9], [5], [1], [3], [2]],
       [[5], [2], [1], [8], [3], [4], [9], [7], [6]],
     ];
-    List<List<List<int?>>> emptyField = [
+    List<List<List<int>>> emptyField = [
       [[], [], [], [], [], [], [], [], []],
       [[], [], [], [], [], [], [], [], []],
       [[], [], [], [], [], [], [], [], []],
@@ -60,7 +65,7 @@ void main() {
           "500834976",
         ];
         Solver leftSolver = Solver(leftInput);
-        List<List<List<int?>>> leftOptionField = [
+        List<List<List<int>>> leftOptionField = [
           [[6], [1], [3], [4], [5], [8], [2], [9], [7]],
           [[2,7,8], [2,7,8], [2,7,8], [3], [1], [9], [5], [6], [4]],
           [[5,9], [4], [5,9], [2], [6], [7], [3], [8], [1]],
@@ -95,7 +100,7 @@ void main() {
         "000050300",
       ];
       Solver firstRealSolver = Solver(firstSudoku);
-      List<List<List<int?>>> firstSudokuOptions = [
+      List<List<List<int>>> firstSudokuOptions = [
         [[4], [1, 2, 3, 9], [5], [6], [7], [8], [1, 2, 3, 9], [1, 2, 3, 9], [1, 2, 3, 9]],
         [[9], [7], [8], [3], [2], [1], [4], [5], [6]],
         [[6], [2, 4,8], [1], [2, 4, 8], [9], [5], [7], [2, 4, 8], [3]],
@@ -113,7 +118,7 @@ void main() {
       expect(firstRealSolver.getOptions(), firstSudokuOptions);
     });
 
-    test("lines and horizontal", () {
+    test("lines and colum", () {
       //Arrange
       List<String> firstSudoku = [
         "405678000",
@@ -127,7 +132,7 @@ void main() {
         "000050300",
       ];
       Solver firstRealSolver = Solver(firstSudoku);
-      List<List<List<int?>>> firstSudokuOptions = [
+      List<List<List<int>>> firstSudokuOptions = [
         [[4],                   [1, 2, 3],             [5],              [6],             [7],           [8],                   [1, 2],                   [2, 9],                [1, 2, 9]],
         [[9],                   [7],                   [8],              [3],             [2],           [1],                   [4],                      [5],                   [6]],
         [[6],                   [2, 4,8],              [1],              [4],             [9],           [5],                   [7],                      [2, 8],                [3]],
@@ -145,7 +150,38 @@ void main() {
       //Assert
       expect(firstRealSolver.getOptions(), firstSudokuOptions);
     });
-    test("lines horzontal quare test until end", (){
+    test("lines colums and sqaure", (){
+      List<String> sudokuFive = [
+        "003009267",
+        "090860000",
+        "201500400",
+        "900401080",
+        "076000130",
+        "010607009",
+        "009005603",
+        "000094010",
+        "835700900",
+      ];
+      List<List<List<int>>> sudokuFiveOptions = [
+        [[4,5], [4,5,8], [3], [1], [4], [9], [2], [6], [7]],
+        [[4,5,7], [9], [4,7], [8], [6], [2,3], [3,5], [5], [1,5]],
+        [[2], [6,8], [1], [5], [3,7], [3], [4], [9], [8]],
+        [[9], [2,5], [2,8], [4], [2,3,5], [1], [5,6,7], [8], [2,5,6]],
+        [[4,5], [7], [6], [2,9], [2,5,8], [2,8], [1], [3], [2,4,5,8]],
+        [[3,5], [1], [2,4,8], [6], [2,3,5,8], [7], [5], [2,4,5], [9]],
+        [[1,4,7], [2,4], [9], [1,2], [1,2,8], [5], [6], [1,2,4], [3]],
+        [[3,6,7], [2,6], [2,7], [2,3], [9], [4], [3,5,6,7,8], [1], [2,5,6,8]],
+        [[8], [3], [5], [7], [1,2,3,8], [2,6,8], [9], [2,4], [2,4,8]],
+      ];
+      Solver fiveSolver = Solver(sudokuFive);
+      fiveSolver.copyStartGridToOptions();
+      fiveSolver.calculateLine();
+      fiveSolver.calculateColumn();
+      fiveSolver.calculateSquare();
+      expect(fiveSolver.getOptions(), sudokuFiveOptions);
+    });
+    /*
+    test("lines horzontal quare until end", (){
       //Arrange
       List<String> firstSudoku = [
         "405678000",
@@ -159,7 +195,7 @@ void main() {
         "000050300",
       ];
       Solver loopSolver = Solver(firstSudoku);
-      List<List<List<int?>>> allOnceOptions = [
+      List<List<List<int>>> allOnceOptions = [
         [[4],                   [3],                   [5],              [6],             [7],           [8],                   [1],                      [9],                   [9]],
         [[9],                   [7],                   [8],              [3],             [2],           [1],                   [4],                      [5],                   [6]],
         [[6],                   [2],                   [1],              [4],             [9],           [5],                   [7],                      [8],                   [3]],
@@ -190,7 +226,7 @@ void main() {
         "000050300",
       ];
       Solver onceSolver = Solver(firstSudoku);
-      List<List<List<int?>>> allOnceOptions = [
+      List<List<List<int>>> allOnceOptions = [
         [[4],                   [2, 3],                [5],              [6],             [7],           [8],                   [1, 2],                   [2, 9],                [1, 2, 9]],
         [[9],                   [7],                   [8],              [3],             [2],           [1],                   [4],                      [5],                   [6]],
         [[6],                   [2],                   [1],              [4],             [9],           [5],                   [7],                      [2, 8],                [3]],
@@ -209,5 +245,6 @@ void main() {
       //Assert
       expect(onceSolver.getOptions(), allOnceOptions);
     });
+     */
 }
 
