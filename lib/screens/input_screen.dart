@@ -21,71 +21,69 @@ class _InputScreenState extends State<InputScreen> {
         backgroundColor: const Color(0xffE29A4C),
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: MediaQuery.of(context).orientation == Orientation.portrait
-              ? const EdgeInsets.all(24)
-              : EdgeInsets.symmetric(
-            vertical: 40,
-            horizontal: MediaQuery.of(context).size.width / 5,
-          ),
-          child: Form(
-            key: _formKey,
+        child: Container(
+          color: Colors.blue, // Background color for the entire SafeArea
+          child: SingleChildScrollView(
+            padding: MediaQuery.of(context).orientation == Orientation.portrait
+                ? const EdgeInsets.all(24)
+                : EdgeInsets.symmetric(
+              vertical: 40,
+              horizontal: MediaQuery.of(context).size.width / 5,
+            ),
             child: Column(
-              children: <Widget>[
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    double fontSize = constraints.maxWidth * 0.04; // Scales font size dynamically
-                    return Container(
-                      padding: const EdgeInsets.all(16),
-                      color: const Color(0xffE29A4C), // Matches AppBar background color
+            children: [
+              Form(
+              key: _formKey,
+              child: Container(
+                color: const Color(0xffE29A4C), // Brown canvas for Sudoku content
+                padding: const EdgeInsets.all(16), // Adds padding around the content
+                child: Column(
+                  mainAxisSize: MainAxisSize.min, // Adjusts height dynamically
+                  children: <Widget>[
+                    const Padding(
+                      padding: EdgeInsets.all(16.0),
                       child: Text(
                         "Please enter each line of your Sudoku and use 0 for empty spots",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: fontSize.clamp(14, 20), // Ensures font size stays between 14 and 20
+                          fontSize: 16, // Can be adjusted or made dynamic
                         ),
                       ),
-                    );
-                  },
+                    ),
+                    for (int i = 0; i < 9; i++) inputName("${i + 1}.Line", i),
+                  ],
                 ),
-                inputName("1.Line",0),
-                inputName("2.Line",1),
-                inputName("3.Line",2),
-                inputName("4.Line",3),
-                inputName("5.Line",4),
-                inputName("6.Line",5),
-                inputName("7.Line",6),
-                inputName("8.Line",7),
-                inputName("9.Line",8),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState?.validate() ?? false) {
-                      _formKey.currentState?.save();
-                      print('Form is valid. Lines: $lines');
-                    } else {
-                      print('Form is not valid.');
-                    }
-                    Solver Ysolver = Solver(lines);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xffE29A4C),
-                    foregroundColor: Colors.black,
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                    textStyle: const TextStyle(fontSize: 16),
-                  ),
-                  child: const Text('Calculate Solution'),
-                ),
-
-              ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState?.validate() ?? false) {
+                  _formKey.currentState?.save();
+                  print('Form is valid. Lines: $lines');
+                } else {
+                  print('Form is not valid.');
+                }
+                Solver Ysolver = Solver(lines); // Ensure Solver is correctly defined
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xffE29A4C),
+                foregroundColor: Colors.black,
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                textStyle: const TextStyle(fontSize: 16),
+              ),
+              child: const Text('Calculate Solution'),
+            ),
+            ],
             ),
           ),
         ),
       ),
-      backgroundColor: Colors.blue,
     );
   }
+
+
 
   TextFormField inputName(String label, int index) {
     return TextFormField(
