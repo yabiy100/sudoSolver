@@ -32,7 +32,7 @@ class Solver {
     }
     grid.add(intLine);
   }
-  void calculateAllOptionens(){
+  void solveSudoku(){
     while(changed == true){
       changed = false;
       calculateLine();

@@ -180,7 +180,6 @@ void main() {
       fiveSolver.calculateSquare();
       expect(fiveSolver.getOptions(), sudokuFiveOptions);
     });
-    /*
     test("lines horzontal quare until end", (){
       //Arrange
       List<String> firstSudoku = [
@@ -208,10 +207,12 @@ void main() {
       ];
       //Act
       loopSolver.copyStartGridToOptions();
-      loopSolver.calculateAllOptionens();
+      loopSolver.solveSudoku();
+      loopSolver.solveSudoku();
       //Assert
       expect(loopSolver.getOptions(), allOnceOptions);
     });
+    /*
     test("lines horzontal quare test once", (){
       //Arrange
       List<String> firstSudoku = [
