@@ -193,9 +193,8 @@ void main() {
         "309847010",
         "000050300",
       ];
-      Solver loopSolver = Solver(firstSudoku);
       List<List<List<int>>> allOnceOptions = [
-        [[4],                   [3],                   [5],              [6],             [7],           [8],                   [1],                      [9],                   [9]],
+        [[4],                   [3],                   [5],              [6],             [7],           [8],                   [1],                      [2],                   [9]],
         [[9],                   [7],                   [8],              [3],             [2],           [1],                   [4],                      [5],                   [6]],
         [[6],                   [2],                   [1],              [4],             [9],           [5],                   [7],                      [8],                   [3]],
         [[2],                   [4],                   [3],              [5],             [8],           [6],                   [9],                      [7],                   [1]],
@@ -205,13 +204,45 @@ void main() {
         [[3],                   [6],                   [9],              [8],             [4],           [7],                   [5],                      [1],                   [2]],
         [[7],                   [8],                   [2],              [1],             [5],           [9],                   [3],                      [6],                   [4]]
       ];
+      Solver loopSolver = Solver(firstSudoku);
       //Act
       loopSolver.copyStartGridToOptions();
-      loopSolver.solveSudoku();
       loopSolver.solveSudoku();
       //Assert
       expect(loopSolver.getOptions(), allOnceOptions);
     });
+  test("First Real Sudoku", (){
+    //Arrange
+    List<String> firstSudoku = [
+      "000260701",
+      "680070090",
+      "190004500",
+      "820100040",
+      "004602900",
+      "050003028",
+      "009300074",
+      "040050036",
+      "703018000",
+
+    ];
+    List<List<List<int>>> allOnceOptions = [
+      [[4],                   [3],                   [5],              [2],             [6],           [9],                   [7],                      [8],                   [1]],
+      [[6],                   [8],                   [2],              [5],             [7],           [1],                   [4],                      [9],                   [3]],
+      [[1],                   [9],                   [7],              [8],             [3],           [4],                   [5],                      [6],                   [2]],
+      [[8],                   [2],                   [6],              [1],             [9],           [5],                   [3],                      [4],                   [7]],
+      [[3],                   [7],                   [4],              [6],             [8],           [2],                   [9],                      [1],                   [5]],
+      [[9],                   [5],                   [1],              [7],             [4],           [3],                   [6],                      [2],                   [8]],
+      [[5],                   [1],                   [9],              [3],             [2],           [6],                   [8],                      [7],                   [4]],
+      [[2],                   [4],                   [8],              [9],             [5],           [7],                   [1],                      [3],                   [6]],
+      [[7],                   [6],                   [3],              [4],             [1],           [8],                   [2],                      [5],                   [9]]
+    ];
+    Solver loopSolver = Solver(firstSudoku);
+    //Act
+    loopSolver.copyStartGridToOptions();
+    loopSolver.solveSudoku();
+    //Assert
+    expect(loopSolver.getOptions(), allOnceOptions);
+  });
     /*
     test("lines horzontal quare test once", (){
       //Arrange

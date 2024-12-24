@@ -1,8 +1,7 @@
 class Solver {
   List<List<int>> grid = [];
-  int lineSize = 9;
-  List<List<int>> solvedGrid = [];
   List<List<List<int>>> options = [];
+  int lineSize = 9;
   bool changed = true;
 
   Solver(List<String> rawInput){
@@ -24,11 +23,7 @@ class Solver {
 
   void transformEachNumber(String line, List<int> intLine) {
     for(int i = 0; i < lineSize; i++){
-      if(line[i] == "0"){
-        intLine.add(0);
-      }else{
         intLine.add(int.parse(line[i]));
-      }
     }
     grid.add(intLine);
   }
@@ -38,6 +33,7 @@ class Solver {
       calculateLine();
       calculateColumn();
       calculateSquare();
+      printOptions();
     }
   }
 
@@ -52,13 +48,22 @@ class Solver {
           changed = true;
           field.remove(0);
           List<int> allNumbers = [1,2,3,4,5,6,7,8,9];
-          for(int i = 0; i < lineSize; i++){
-            if(options[row][i].length == 1){
-              allNumbers.remove(options[row][i].first);
-            }
-          }
-          options[row][col] = allNumbers;
+          goTroughLine(row, allNumbers);
+          options[row][col] = List.from(allNumbers);
+        }else if(field.length > 1){
+          changed = true;
+          List<int> allNumbers = List.from(field);
+          goTroughLine(row, allNumbers);
+          options[row][col] = List.from(allNumbers);
         }
+      }
+    }
+  }
+
+  void goTroughLine(int row, List<int> allNumbers) {
+    for(int i = 0; i < lineSize; i++){
+      if(options[row][i].length == 1){
+        allNumbers.remove(options[row][i].first);
       }
     }
   }
@@ -66,10 +71,10 @@ class Solver {
 
   void calculateColumn() {
     for (int col = 0; col < lineSize; col++) {
-      List<int> columnNumbers = getColumn(col);
       for (int row = 0; row < lineSize; row++) {
         List<int> field = options[row][col];
         if (field.first == 0 || field.length > 1) {
+          List<int> columnNumbers = getColumn(col);
           changed = true;
           field.remove(0);
           List<int> allNumbers = options[row][col];
@@ -77,7 +82,7 @@ class Solver {
           for (int num in columnNumbers) {
             allNumbers.remove(num);
           }
-          options[row][col] = allNumbers;
+          options[row][col] = List.from(allNumbers);
         }
       }
     }
@@ -105,7 +110,7 @@ class Solver {
               allNumbers.remove(num);
             }
           }
-          options[row][col] = allNumbers;
+          options[row][col] = List.from(allNumbers);
         }
       }
     }
@@ -115,7 +120,9 @@ class Solver {
   List<int> getColumn(int colIndex) {
     List<int> column = [];
     for (int row = 0; row < lineSize; row++) {
-      column.add(grid[row][colIndex]);
+        if(options[row][colIndex].length == 1){
+          column.add(options[row][colIndex].first);
+        }
     }
     return column;
   }
