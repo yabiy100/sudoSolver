@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:sudoku_solver/data/repositories/solver.dart";
+
 
 class InputScreen extends StatefulWidget {
   const InputScreen({super.key});
@@ -22,11 +22,11 @@ class _InputScreenState extends State<InputScreen> {
       ),
       body: SafeArea(
         child: Container(
-          color: Colors.blue, // Background color for the entire SafeArea
+          color: Colors.blue,
           child: SingleChildScrollView(
             padding: MediaQuery.of(context).orientation == Orientation.portrait
-                ? const EdgeInsets.all(24)
-                : EdgeInsets.symmetric(
+                ? const EdgeInsets.all(24) // when in Portrait mode
+                : EdgeInsets.symmetric( // when in Landscape mode
               vertical: 40,
               horizontal: MediaQuery.of(context).size.width / 5,
             ),
@@ -35,10 +35,10 @@ class _InputScreenState extends State<InputScreen> {
               Form(
               key: _formKey,
               child: Container(
-                color: const Color(0xffE29A4C), // Brown canvas for Sudoku content
-                padding: const EdgeInsets.all(16), // Adds padding around the content
+                color: const Color(0xffE29A4C), // color of form
+                padding: const EdgeInsets.all(16), // padding around the form
                 child: Column(
-                  mainAxisSize: MainAxisSize.min, // Adjusts height dynamically
+                  mainAxisSize: MainAxisSize.min, // minimize height
                   children: <Widget>[
                     const Padding(
                       padding: EdgeInsets.all(16.0),
@@ -47,11 +47,11 @@ class _InputScreenState extends State<InputScreen> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 16, // Can be adjusted or made dynamic
+                          fontSize: 16,
                         ),
                       ),
                     ),
-                    for (int i = 0; i < 9; i++) inputName("${i + 1}.Line", i),
+                    for (int i = 0; i < 9; i++) inputName("${i + 1}.Line", i), // create 9 input fields
                   ],
                 ),
               ),
@@ -65,7 +65,7 @@ class _InputScreenState extends State<InputScreen> {
                 } else {
                   print('Form is not valid.');
                 }
-                Solver Ysolver = Solver(lines); // Ensure Solver is correctly defined
+                //Solver Ysolver = Solver(lines); // Ensure Solver is correctly defined
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xffE29A4C),
@@ -73,7 +73,7 @@ class _InputScreenState extends State<InputScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 textStyle: const TextStyle(fontSize: 16),
               ),
-              child: const Text('Calculate Solution'),
+              child: const Text("Calculate Solution"),
             ),
             ],
             ),
@@ -89,8 +89,8 @@ class _InputScreenState extends State<InputScreen> {
     return TextFormField(
       decoration: InputDecoration(
         labelText: label,
-        filled: true, // Enables the background color
-        fillColor: const Color(0xffE29A4C), // Sets the background color to blue
+        filled: true, // activates background
+        fillColor: const Color(0xffE29A4C),
       ),
       validator: (value) {
         if(value == null || value.isEmpty){
@@ -105,8 +105,7 @@ class _InputScreenState extends State<InputScreen> {
         return null;
       },
         onSaved: (value) {
-          // Save the value to the correct index in the lines list
-          lines[index] = value ?? "";
+          lines[index] = value ?? ""; // if value is null safe empty string ""
         }
     );
 }

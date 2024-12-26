@@ -10,7 +10,6 @@ class TitleScreen extends StatelessWidget {
       Navigator.pushReplacementNamed(context, "/input");
     });
 
-
     return Scaffold(
       body: SafeArea(
         child: Center(
