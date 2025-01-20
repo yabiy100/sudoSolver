@@ -4,53 +4,69 @@ class Solver {
   int lineSize = 9;
   bool changed = true;
 
-  Solver(List<String> rawInput){
+  Solver(List<String> rawInput) {
     transformToGrid(rawInput);
   }
 
   void transformToGrid(List<String> rawInput) {
-    for(String line in rawInput){
+    /*for (String line in rawInput) {
       List<int> intLine = [];
-      if(line.isEmpty){
+      if (line.isEmpty) {
         intLine = List.filled(9, 0); // fill empty line with 9 times 0
         grid.add(intLine);
-      }else {
+      } else {
         //Analyze each Character of each Line
         transformEachNumber(line, intLine);
       }
     }
+
+    for (List<int> line in grid) {
+      List<List<int>> lineToAdd = [];
+      for (int number in line) {
+        List<int> oneField = [number];
+        lineToAdd.add(oneField);
+      }
+      options.add(lineToAdd);
+    }*/
+
+    for (String line in rawInput) {
+      List<List<int>> lineToAdd = [];
+      if (line.isEmpty) {
+        for (int i = 0; i < lineSize; i++) {
+          lineToAdd.add([0]);
+        }
+      } else {
+        List<int> intLine = [];
+        for (int i = 0; i < lineSize; i++) {
+          intLine.add(int.parse(line[i]));
+        }
+        lineToAdd.add(intLine);
+      }
+      options.add(lineToAdd);
+    }
   }
 
-  void transformEachNumber(String line, List<int> intLine) {
-    for(int i = 0; i < lineSize; i++){
-        intLine.add(int.parse(line[i]));
-    }
-    grid.add(intLine);
-  }
-  void solveSudoku(){
-    while(changed == true){
+  void solveSudoku() {
+    while (changed == true) {
       changed = false;
       calculateLine();
       calculateColumn();
       calculateSquare();
-      printOptions();
     }
   }
-
-
 
   void calculateLine() {
     for (int row = 0; row < lineSize; row++) {
       for (int col = 0; col < lineSize; col++) {
         List<int> field = options[row][col];
         //If field is empthy calculate remaining options in line
-        if(field.first == 0){
+        if (field.first == 0) {
           changed = true;
           field.remove(0);
-          List<int> allNumbers = [1,2,3,4,5,6,7,8,9];
+          List<int> allNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
           goTroughLine(row, allNumbers);
           options[row][col] = List.from(allNumbers);
-        }else if(field.length > 1){
+        } else if (field.length > 1) {
           changed = true;
           List<int> allNumbers = List.from(field);
           goTroughLine(row, allNumbers);
@@ -61,13 +77,12 @@ class Solver {
   }
 
   void goTroughLine(int row, List<int> allNumbers) {
-    for(int i = 0; i < lineSize; i++){
-      if(options[row][i].length == 1){
+    for (int i = 0; i < lineSize; i++) {
+      if (options[row][i].length == 1) {
         allNumbers.remove(options[row][i].first);
       }
     }
   }
-
 
   void calculateColumn() {
     for (int col = 0; col < lineSize; col++) {
@@ -87,21 +102,22 @@ class Solver {
       }
     }
   }
+
   //calculates which nummbers in a 3 by 3 Block cancel out the options
   void calculateSquare() {
-    for(int row = 0; row < lineSize; row = row + 3 ){
-      for(int col = 0; col < lineSize; col = col + 3){
-        calculateOneSqaure(row,col);
+    for (int row = 0; row < lineSize; row = row + 3) {
+      for (int col = 0; col < lineSize; col = col + 3) {
+        calculateOneSqaure(row, col);
       }
     }
   }
 
   void calculateOneSqaure(int sqaureRow, sqaureCol) {
     List<int> squareNumbers = findNumbersInSqaure(sqaureRow, sqaureCol);
-    for(int row = sqaureRow; row < sqaureRow + 3; row++){
-      for(int col = sqaureCol; col < sqaureCol + 3; col++){
+    for (int row = sqaureRow; row < sqaureRow + 3; row++) {
+      for (int col = sqaureCol; col < sqaureCol + 3; col++) {
         List<int> field = options[row][col];
-        if(field.length > 1){
+        if (field.length > 1) {
           changed = true;
           List<int> allNumbers = options[row][col];
           //all Numbers that are already set in a sqaure;
@@ -120,9 +136,9 @@ class Solver {
   List<int> getColumn(int colIndex) {
     List<int> column = [];
     for (int row = 0; row < lineSize; row++) {
-        if(options[row][colIndex].length == 1){
-          column.add(options[row][colIndex].first);
-        }
+      if (options[row][colIndex].length == 1) {
+        column.add(options[row][colIndex].first);
+      }
     }
     return column;
   }
@@ -130,7 +146,7 @@ class Solver {
   List<int> findNumbersInSqaure(int startRow, int startCol) {
     List<int> sqaure = [];
     for (int row = startRow; row < startRow + 3; row++) {
-      for (int col = startCol ; col < startCol + 3; col++) {
+      for (int col = startCol; col < startCol + 3; col++) {
         if (options[row][col].length == 1) {
           sqaure.add(options[row][col].first);
         }
@@ -139,34 +155,23 @@ class Solver {
     return sqaure;
   }
 
-    void copyStartGridToOptions() {
-      for (List<int> line in grid) {
-        List<List<int>> lineToAdd = [];
-        for (int number in line) {
-          List<int> oneField = [number];
-          lineToAdd.add(oneField);
-        }
-        options.add(lineToAdd);
-      }
-    }
-
-    void printGrid() {
-      for (List<int?> line in grid) {
-        print(line);
-      }
-    }
-
-    List<List<int?>> getField() {
-      return grid;
-    }
-
-    List<List<List<int?>>> getOptions() {
-      return options;
-    }
-
-    void printOptions() {
-      for (List<List<int?>> line in options) {
-        print(line);
-      }
+  void printGrid() {
+    for (List<int?> line in grid) {
+      print(line);
     }
   }
+
+  List<List<int?>> getField() {
+    return grid;
+  }
+
+  List<List<List<int?>>> getOptions() {
+    return options;
+  }
+
+  void printOptions() {
+    for (List<List<int?>> line in options) {
+      print(line);
+    }
+  }
+}
