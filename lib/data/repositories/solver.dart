@@ -9,38 +9,19 @@ class Solver {
   }
 
   void transformToGrid(List<String> rawInput) {
-    /*for (String line in rawInput) {
-      List<int> intLine = [];
-      if (line.isEmpty) {
-        intLine = List.filled(9, 0); // fill empty line with 9 times 0
-        grid.add(intLine);
-      } else {
-        //Analyze each Character of each Line
-        transformEachNumber(line, intLine);
-      }
-    }
-
-    for (List<int> line in grid) {
-      List<List<int>> lineToAdd = [];
-      for (int number in line) {
-        List<int> oneField = [number];
-        lineToAdd.add(oneField);
-      }
-      options.add(lineToAdd);
-    }*/
-
     for (String line in rawInput) {
       List<List<int>> lineToAdd = [];
+      //Create Line with lists that only consists of zeros
       if (line.isEmpty) {
         for (int i = 0; i < lineSize; i++) {
           lineToAdd.add([0]);
         }
+        //transform the Numbers into Lists with one element
       } else {
-        List<int> intLine = [];
         for (int i = 0; i < lineSize; i++) {
-          intLine.add(int.parse(line[i]));
+          List<int> oneField = [int.parse(line[i])];
+          lineToAdd.add(oneField);
         }
-        lineToAdd.add(intLine);
       }
       options.add(lineToAdd);
     }

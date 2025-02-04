@@ -4,6 +4,7 @@ import 'package:sudoku_solver/data/repositories/solver.dart';
 import 'package:test/test.dart';
 
 void main() {
+  //@formatter:off
   setUp(() {
     /*empty test
     test("lines horzontal quare until end", (){
@@ -102,7 +103,7 @@ void main() {
       Solver firstRealSolver = Solver(firstSudoku);
       List<List<List<int>>> firstSudokuOptions = [
         [[4], [1, 2, 3, 9], [5], [6], [7], [8], [1, 2, 3, 9], [1, 2, 3, 9], [1, 2, 3, 9]],
-        [[9], [7], [8], [3], [2], [1], [4], [5], [6]],
+        [[9], [7],        [8], [3], [2], [1], [4], [5], [6]],
         [[6], [2, 4,8], [1], [2, 4, 8], [9], [5], [7], [2, 4, 8], [3]],
         [[2], [1, 3, 4, 5, 7], [1, 3, 4, 5, 7],  [1, 3, 4, 5, 7], [8], [6], [9],[ 1, 3, 4, 5, 7], [1, 3, 4, 5, 7]],
         [[8], [9], [6], [7], [1], [4], [2], [3], [5]],
