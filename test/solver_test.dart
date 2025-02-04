@@ -78,7 +78,6 @@ void main() {
           [[5], [1,2], [1,2], [8], [3], [4], [9], [7], [6]],
         ];
         //Act
-        leftSolver.copyStartGridToOptions();
         leftSolver.calculateLine();
         //Assert
         expect(leftSolver.getOptions(), leftOptionField);
@@ -113,7 +112,6 @@ void main() {
         [[1, 2, 4, 6, 7, 8, 9], [1, 2, 4, 6, 7, 8, 9], [1, 2, 4, 6, 7, 8, 9], [1, 2, 4, 6, 7, 8, 9], [5], [1, 2, 4, 6, 7, 8, 9], [3], [1, 2, 4, 6, 7, 8, 9], [1, 2, 4, 6, 7, 8, 9],]
       ];
       //Act
-      firstRealSolver.copyStartGridToOptions();
       firstRealSolver.calculateLine();
       //Assert
       expect(firstRealSolver.getOptions(), firstSudokuOptions);
@@ -145,7 +143,6 @@ void main() {
         [[7],                   [1, 2, 4, 6, 8],       [2],              [1, 9],       [5],           [9],                   [3],                      [2, 6, 8, 9],          [1, 4, 8, 9],]
       ];
       //Act
-      firstRealSolver.copyStartGridToOptions();
       firstRealSolver.calculateLine();
       firstRealSolver.calculateColumn();
       //Assert
@@ -175,7 +172,6 @@ void main() {
         [[8],      [3],     [5],     [7],   [1],       [6],          [9],          [2,4],   [2,4]],
       ];
       Solver fiveSolver = Solver(sudokuFive);
-      fiveSolver.copyStartGridToOptions();
       fiveSolver.calculateLine();
       fiveSolver.calculateColumn();
       fiveSolver.calculateSquare();
@@ -207,7 +203,6 @@ void main() {
       ];
       Solver loopSolver = Solver(firstSudoku);
       //Act
-      loopSolver.copyStartGridToOptions();
       loopSolver.solveSudoku();
       //Assert
       expect(loopSolver.getOptions(), allOnceOptions);
@@ -239,7 +234,6 @@ void main() {
     ];
     Solver loopSolver = Solver(firstSudoku);
     //Act
-    loopSolver.copyStartGridToOptions();
     loopSolver.solveSudoku();
     //Assert
     expect(loopSolver.getOptions(), allOnceOptions);
@@ -271,7 +265,6 @@ void main() {
         [[1,7],                 [1, 6, 8],             [2],              [1],             [5],           [9],                   [3],                      [ 6, 8, 9],            [4, 8, 9],]
       ];
       //Act
-      onceSolver.copyStartGridToOptions();
       onceSolver.calculateLine();
       onceSolver.calculateColumn();
       onceSolver.calculateSquare();
