@@ -40,24 +40,25 @@ class Solver {
     for (int row = 0; row < lineSize; row++) {
       for (int col = 0; col < lineSize; col++) {
         List<int> field = options[row][col];
-        //If field is empthy calculate remaining options in line
+        //If field is empty calculate remaining options in line
         if (field.first == 0) {
           changed = true;
           field.remove(0);
           List<int> allNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-          goTroughLine(row, allNumbers);
+          removeLineNumbers(row, allNumbers);
           options[row][col] = List.from(allNumbers);
+          // Options field has more than one possible Number
         } else if (field.length > 1) {
           changed = true;
           List<int> allNumbers = List.from(field);
-          goTroughLine(row, allNumbers);
+          removeLineNumbers(row, allNumbers);
           options[row][col] = List.from(allNumbers);
         }
       }
     }
   }
 
-  void goTroughLine(int row, List<int> allNumbers) {
+  void removeLineNumbers(int row, List<int> allNumbers) {
     for (int i = 0; i < lineSize; i++) {
       if (options[row][i].length == 1) {
         allNumbers.remove(options[row][i].first);
@@ -84,7 +85,7 @@ class Solver {
     }
   }
 
-  //calculates which nummbers in a 3 by 3 Block cancel out the options
+  //calculates which numbers in a 3 by 3 Block cancel out the options
   void calculateSquare() {
     for (int row = 0; row < lineSize; row = row + 3) {
       for (int col = 0; col < lineSize; col = col + 3) {
@@ -124,6 +125,7 @@ class Solver {
     return column;
   }
 
+  //return a list with all set Numbers in a 3x3 Sudoku Square
   List<int> findNumbersInSqaure(int startRow, int startCol) {
     List<int> sqaure = [];
     for (int row = startRow; row < startRow + 3; row++) {
