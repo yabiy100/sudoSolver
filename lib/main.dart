@@ -19,9 +19,6 @@ class MyApp extends StatelessWidget {
         "/": (context) => const TitleScreen(),
         "/input": (context) => const InputScreen(),
       },
-
-
-
       theme: ThemeData(
         // This is the theme of your application.
         //

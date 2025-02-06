@@ -34,6 +34,7 @@ class Solver {
       calculateColumn();
       calculateSquare();
     }
+    writeOptionsToGrid();
   }
 
   void calculateLine() {
@@ -144,17 +145,27 @@ class Solver {
     }
   }
 
-  List<List<int?>> getField() {
+  List<List<int>> getGrid() {
     return grid;
   }
 
-  List<List<List<int?>>> getOptions() {
+  List<List<List<int>>> getOptions() {
     return options;
   }
 
   void printOptions() {
     for (List<List<int?>> line in options) {
       print(line);
+    }
+  }
+
+  void writeOptionsToGrid() {
+    for (List<List<int>> line in options) {
+      List<int> gridLine = [];
+      for (List<int> field in line) {
+        gridLine.add(field.first);
+      }
+      grid.add(gridLine);
     }
   }
 }
