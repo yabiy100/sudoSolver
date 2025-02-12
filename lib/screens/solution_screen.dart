@@ -8,6 +8,19 @@ class SolutionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    sudoku.solveSudoku();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Sudoku Solution'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: sudoku.getGrid().map((line) {
+            return Text(line.toString());
+          }).toList(),
+        ),
+      ),
+    );
   }
 }
