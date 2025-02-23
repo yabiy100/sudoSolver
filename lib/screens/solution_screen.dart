@@ -31,7 +31,7 @@ class SolutionScreen extends StatelessWidget {
                   border: Border.all(
                     color: Colors.black, width: 2.0
                   ),
-                  color: Colors.blue,
+                  color: Colors.white,
                 ),
                 alignment: Alignment.center,
                 child: Text(

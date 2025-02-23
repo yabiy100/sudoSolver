@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sudoku_solver/data/repositories/solver.dart';
+import 'package:sudoku_solver/screens/input_screen.dart';
 import 'package:sudoku_solver/screens/solution_screen.dart';
 
 void main() {
@@ -17,6 +18,11 @@ void main() {
   testSudoku.solveSudoku();
   runApp(MaterialApp(
     home: SolutionScreen(sudoku: testSudoku),
+    theme: new ThemeData(scaffoldBackgroundColor: Colors.blue),
   ));
+   /*
+  runApp(MaterialApp(
+    home: InputScreen(),
+  ));*/
 }
 
