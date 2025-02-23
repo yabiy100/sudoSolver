@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sudoku_solver/data/repositories/solver.dart';
-import 'package:sudoku_solver/screens/input_screen.dart';
 import 'package:sudoku_solver/screens/solution_screen.dart';
-import 'package:sudoku_solver/screens/titel_screen.dart';
 
 void main() {
   Solver testSudoku = Solver([
