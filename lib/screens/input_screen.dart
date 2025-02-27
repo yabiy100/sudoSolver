@@ -1,4 +1,7 @@
 import "package:flutter/material.dart";
+import "package:sudoku_solver/screens/solution_screen.dart";
+
+import "../data/repositories/solver.dart";
 
 
 class InputScreen extends StatefulWidget {
@@ -65,7 +68,13 @@ class _InputScreenState extends State<InputScreen> {
                 } else {
                   print('Form is not valid.');
                 }
-                //Solver Ysolver = Solver(lines); // Ensure Solver is correctly defined
+                Solver solver = Solver(lines); // Ensure Solver is correctly defined
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SolutionScreen(sudoku: solver),
+                  ),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xffE29A4C),

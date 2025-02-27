@@ -4,6 +4,7 @@ import 'package:sudoku_solver/screens/input_screen.dart';
 import 'package:sudoku_solver/screens/solution_screen.dart';
 
 void main() {
+  /* test Sudoku for solution Screen
   Solver testSudoku = Solver([
     "003009267",
     "090860000",
@@ -20,9 +21,9 @@ void main() {
     home: SolutionScreen(sudoku: testSudoku),
     theme: new ThemeData(scaffoldBackgroundColor: Colors.blue),
   ));
-   /*
+  */
   runApp(MaterialApp(
     home: InputScreen(),
-  ));*/
+  ));
 }
 

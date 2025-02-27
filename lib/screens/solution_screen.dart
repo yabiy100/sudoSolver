@@ -15,6 +15,7 @@ class SolutionScreen extends StatelessWidget {
           title: const Text("Solution to Sudoku"),
           backgroundColor: const Color(0xffE29A4C),
         ),
+      backgroundColor: Colors.blue,
       body: Center(
         child: AspectRatio(
           aspectRatio: 1, //Sqaure grid 1:1
