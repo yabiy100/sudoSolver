@@ -65,16 +65,16 @@ class _InputScreenState extends State<InputScreen> {
                 if (_formKey.currentState?.validate() ?? false) {
                   _formKey.currentState?.save();
                   print('Form is valid. Lines: $lines');
+                  Solver solver = Solver(lines); // Ensure Solver is correctly defined
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SolutionScreen(sudoku: solver),
+                    ),
+                  );
                 } else {
                   print('Form is not valid.');
                 }
-                Solver solver = Solver(lines); // Ensure Solver is correctly defined
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => SolutionScreen(sudoku: solver),
-                  ),
-                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xffE29A4C),
@@ -103,7 +103,7 @@ class _InputScreenState extends State<InputScreen> {
       ),
       validator: (value) {
         if(value == null || value.isEmpty){
-          return null;
+          return "Please enter in the line";
         }
         if(!regExp.hasMatch(value)){
           return "Please only enter Numbers or Spaces";
