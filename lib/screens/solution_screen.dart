@@ -9,7 +9,7 @@ class SolutionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     sudoku.solveSudoku();
-    List<int> flatSudoku = sudoku.getGrid().expand((row) => row).toList();
+    List<int>? flatSudoku = sudoku.getGrid()?.expand((row) => row).toList();
     return Scaffold(
         appBar: AppBar(
           title: const Text("Solution to Sudoku"),
@@ -26,7 +26,7 @@ class SolutionScreen extends StatelessWidget {
             ),
             itemCount: 81,
             itemBuilder: (context, index) {
-              int field = flatSudoku[index];
+              int? field = flatSudoku?[index];
               return Container(
                 decoration: BoxDecoration(
                   border: Border( //make borders of 3 x 3 Cells bigger

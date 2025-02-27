@@ -1,5 +1,5 @@
 class Solver {
-  List<List<int>> grid = [];
+  List<List<int>>? grid = [];
   List<List<List<int>>> options = [];
   int lineSize = 9;
   bool changed = true;
@@ -140,12 +140,12 @@ class Solver {
   }
 
   void printGrid() {
-    for (List<int?> line in grid) {
+    for (List<int?> line in grid!) {
       print(line);
     }
   }
 
-  List<List<int>> getGrid() {
+  List<List<int>>? getGrid() {
     return grid;
   }
 
@@ -165,7 +165,7 @@ class Solver {
       for (List<int> field in line) {
         gridLine.add(field.first);
       }
-      grid.add(gridLine);
+      grid?.add(gridLine);
     }
   }
 }
