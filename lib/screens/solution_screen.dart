@@ -28,10 +28,17 @@ class SolutionScreen extends StatelessWidget {
               int field = flatSudoku[index];
               return Container(
                 decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.black, width: 2.0
+                  border: Border( //make borders of 3 x 3 Cells bigger
+                    top: BorderSide(width: (index < 9) ? 5 : 1.0, color: Colors.black),
+                    //draw 3 vertical lines left one and the two in the middle
+                    left: BorderSide(width: (index % 9 == 0 || index % 9 == 3 || index % 9 == 6)
+                        ? 5 : 1.0, color: Colors.black),
+                    right: BorderSide(width: ((index + 1) % 9 == 0) ? 5 : 1.0, color: Colors.black),
+                    //draw 3 horizontal lines: 3.row, 6.row and last row
+                    bottom: BorderSide(width: (index >= 72 || (index > 17 && index < 27)
+                    || (index > 44 && index < 54)) ? 5 : 1.0, color: Colors.black),
                   ),
-                  color: Colors.white,
+                color: Colors.white,
                 ),
                 alignment: Alignment.center,
                 child: Text(
