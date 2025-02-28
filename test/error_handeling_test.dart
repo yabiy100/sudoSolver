@@ -13,9 +13,9 @@ void main() {
     */
 
   });
-  test("Sudoku Not solvable", () {
+  test("Sudoku field has more options", () {
     //Arrange
-    List<String> leftInput = [
+    List<String> sevenLineInput = [
       "603458297",
       "000319564",
       "040267381",
@@ -24,10 +24,9 @@ void main() {
       "006573429",
       "300621845",
       "008795132",
-      "777777770",
+      "500834966",
     ];
-    Solver leftSolver = Solver(leftInput);
-
+    Solver leftSolver = Solver(sevenLineInput);
     //Act
     leftSolver.solveSudoku();
     //Assert

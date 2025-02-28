@@ -1,3 +1,5 @@
+import 'package:sudoku_solver/data/repositories/optionsCreater.dart';
+
 class Solver {
   List<List<int>>? grid = [];
   List<List<List<int>>> options = [];
@@ -5,26 +7,8 @@ class Solver {
   bool changed = true;
 
   Solver(List<String> rawInput) {
-    transformToGrid(rawInput);
-  }
-
-  void transformToGrid(List<String> rawInput) {
-    for (String line in rawInput) {
-      List<List<int>> lineToAdd = [];
-      //Create Line with lists that only consists of zeros
-      if (line.isEmpty) {
-        for (int i = 0; i < lineSize; i++) {
-          lineToAdd.add([0]);
-        }
-        //transform the Numbers into Lists with one element
-      } else {
-        for (int i = 0; i < lineSize; i++) {
-          List<int> oneField = [int.parse(line[i])];
-          lineToAdd.add(oneField);
-        }
-      }
-      options.add(lineToAdd);
-    }
+    optionsCreater creater = optionsCreater(rawInput);
+    this.options = creater.getOptions();
   }
 
   void solveSudoku() {
@@ -34,7 +18,12 @@ class Solver {
       calculateColumn();
       calculateSquare();
     }
-    writeOptionsToGrid();
+    if(OptionsAllSolved()){
+      writeOptionsToGrid();
+    } else{
+      grid = null;
+    }
+
   }
 
   void calculateLine() {
@@ -167,5 +156,17 @@ class Solver {
       }
       grid?.add(gridLine);
     }
+  }
+
+  bool OptionsAllSolved() {
+    for (List<List<int>> line in options) {
+      List<int> gridLine = [];
+      for (List<int> field in line) {
+        if(field.length != 1){
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }
