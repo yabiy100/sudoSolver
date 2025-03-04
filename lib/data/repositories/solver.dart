@@ -160,7 +160,7 @@ class Solver {
 
   bool OptionsAllSolved() {
     for (List<List<int>> line in options) {
-      List<int> gridLine = [];
+      List<int> qgridLine = [];
       for (List<int> field in line) {
         if(field.length != 1){
           return false;

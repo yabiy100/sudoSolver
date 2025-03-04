@@ -106,7 +106,7 @@ class _InputScreenState extends State<InputScreen> {
           return "Please enter in the line";
         }
         if(!regExp.hasMatch(value)){
-          return "Please only enter Numbers";
+          return "Please only enter in Numbers";
         }
         if(value.length != 9){
           return "Please enter 9 digits";
