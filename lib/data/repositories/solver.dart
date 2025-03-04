@@ -1,4 +1,4 @@
-import 'package:sudoku_solver/data/repositories/optionsCreater.dart';
+import 'package:sudoku_solver/data/repositories/optionsCreator.dart';
 
 class Solver {
   List<List<int>>? grid = [];
@@ -7,8 +7,8 @@ class Solver {
   bool changed = true;
 
   Solver(List<String> rawInput) {
-    optionsCreater creater = optionsCreater(rawInput);
-    this.options = creater.getOptions();
+    optionsCreator creator = optionsCreator(rawInput);
+    this.options = creator.getOptions();
   }
 
   void solveSudoku() {

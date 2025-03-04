@@ -1,6 +1,6 @@
 // Import the test package and Counter class
 //@formatter:off
-import 'package:sudoku_solver/data/repositories/optionsCreater.dart';
+import 'package:sudoku_solver/data/repositories/optionsCreator.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -31,7 +31,7 @@ void main() {
         [[0],[0],[0],[0],[0],[0],[0],[0],[0]],
       ];
       //@formatter:on
-      optionsCreater options = optionsCreater(emptyGrid);
+      optionsCreator options = optionsCreator(emptyGrid);
       //Accept
       expect(options.getOptions(), emptyField);
     });
@@ -61,7 +61,7 @@ void main() {
       ];
 
 
-      optionsCreater OptionesCreaterFull = optionsCreater(fullInput);
+      optionsCreator OptionesCreaterFull = optionsCreator(fullInput);
       expect(OptionesCreaterFull.getOptions(), fullField);
     });
     test("grid with one Null Line", () {
@@ -76,7 +76,7 @@ void main() {
         "147025839",
         "019283475",
       ];
-      optionsCreater oneLineEmptyOptionesCreater = optionsCreater(oneLineEmptyInput);
+      optionsCreator oneLineEmptyOptionesCreater = optionsCreator(oneLineEmptyInput);
       //@formatter:off
       List<List<List<int>>> intField = [
         [[1], [2], [3], [4], [5], [6], [7], [8], [9]],
@@ -105,7 +105,7 @@ void main() {
         "147025839",
         "019283475",
       ];
-      final OptionesCreater = optionsCreater(rawInput);
+      final OptionesCreater = optionsCreator(rawInput);
       //@formatter:off
       List<List<List<int>>> intField = [
         [[1], [2], [0], [4], [5], [0], [7], [8], [9]],

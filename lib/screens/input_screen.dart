@@ -106,10 +106,14 @@ class _InputScreenState extends State<InputScreen> {
           return "Please enter in the line";
         }
         if(!regExp.hasMatch(value)){
-          return "Please only enter Numbers or Spaces";
+          return "Please only enter Numbers";
         }
         if(value.length != 9){
           return "Please enter 9 digits";
+        }
+        //convert String to set to see if each character is there only once
+        if(value.length != value.split('').toSet().length){
+          return "Please enter each Number only once";
         }
         return null;
       },

@@ -1,8 +1,8 @@
-class optionsCreater {
+class optionsCreator {
   List<List<List<int>>> options = [];
   int lineSize = 9;
 
-  optionsCreater(List<String> rawInput) {
+  optionsCreator(List<String> rawInput) {
     transformToOptions(rawInput);
   }
 
