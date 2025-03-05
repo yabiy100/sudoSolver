@@ -1,5 +1,6 @@
 // Import the test package and Counter class
 
+import 'package:sudoku_solver/data/repositories/optionsCreator.dart';
 import 'package:sudoku_solver/data/repositories/solver.dart';
 import 'package:test/test.dart';
 
@@ -13,7 +14,7 @@ void main() {
     */
 
   });
-  test("Sudoku field has more options", () {
+  test("dual 6 in Line", () {
     //Arrange
     List<String> sevenLineInput = [
       "603458297",
@@ -26,10 +27,7 @@ void main() {
       "008795132",
       "500834966",
     ];
-    Solver leftSolver = Solver(sevenLineInput);
-    //Act
-    leftSolver.solveSudoku();
-    //Assert
-    expect(leftSolver.getGrid(), null);
+    optionsCreator nullOptions = optionsCreator(sevenLineInput);
+    expect(nullOptions.checkForErrors(), "Error: 6 appears twice in Line 9");
   });
 }
