@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:flutter/services.dart";
 import "package:sudoku_solver/screens/solution_screen.dart";
 
 import "../data/repositories/solver.dart";
@@ -49,15 +50,15 @@ class _InputScreenState extends State<InputScreen> {
                     color: Colors.white,
                   ),
                   alignment: Alignment.center,
-                  child: InkWell(
-                    onTap: () {
-                      print("test was klicked");
-                    },
-                    child: Text(
-                      "test",
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
+                  child: TextField(
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
+                    style: const TextStyle(fontSize: 18),
                   ),
+
                 );
               },
             ),
