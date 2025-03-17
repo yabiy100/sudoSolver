@@ -23,71 +23,36 @@ class _InputScreenState extends State<InputScreen> {
         title: const Text("Enter in Sudoku"),
         backgroundColor: const Color(0xffE29A4C),
       ),
-      body: SafeArea(
-        child: Container(
-          color: Colors.blue,
-          child: SingleChildScrollView(
-            padding: MediaQuery.of(context).orientation == Orientation.portrait
-                ? const EdgeInsets.all(24) // when in Portrait mode
-                : EdgeInsets.symmetric( // when in Landscape mode
-              vertical: 40,
-              horizontal: MediaQuery.of(context).size.width / 5,
-            ),
-            child: Column(
-            children: [
-              Form(
-              key: _formKey,
-              child: Container(
-                color: const Color(0xffE29A4C), // color of form
-                padding: const EdgeInsets.all(16), // padding around the form
-                child: Column(
-                  mainAxisSize: MainAxisSize.min, // minimize height
-                  children: <Widget>[
-                    const Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Text(
-                        "Please enter each line of your Sudoku and use 0 for empty spots",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                    for (int i = 0; i < 9; i++) inputName("${i + 1}.Line", i), // create 9 input fields
-                  ],
-                ),
+      backgroundColor: Colors.blue,
+      body: Center(
+          child: AspectRatio(
+            aspectRatio: 1, //Sqaure grid 1:1
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 9,
+                childAspectRatio: 1,
               ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState?.validate() ?? false) {
-                  _formKey.currentState?.save();
-                  print('Form is valid. Lines: $lines');
-                  Solver solver = Solver(lines); // Ensure Solver is correctly defined
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SolutionScreen(sudoku: solver),
+              itemCount: 81,
+              itemBuilder: (context, index) {
+                return Container(
+                  decoration: BoxDecoration(
+                    border: Border( //make borders of 3 x 3 Cells bigger
+                      top: BorderSide(width: (index < 9) ? 5 : 1.0, color: Colors.black),
+                      //draw 3 vertical lines left one and the two in the middle
+                      left: BorderSide(width: (index % 9 == 0 || index % 9 == 3 || index % 9 == 6)
+                          ? 5 : 1.0, color: Colors.black),
+                      right: BorderSide(width: ((index + 1) % 9 == 0) ? 5 : 1.0, color: Colors.black),
+                      //draw 3 horizontal lines: 3.row, 6.row and last row
+                      bottom: BorderSide(width: (index >= 72 || (index > 17 && index < 27)
+                          || (index > 44 && index < 54)) ? 5 : 1.0, color: Colors.black),
                     ),
-                  );
-                } else {
-                  print('Form is not valid.');
-                }
+                    color: Colors.white,
+                  ),
+                  alignment: Alignment.center,
+                );
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xffE29A4C),
-                foregroundColor: Colors.black,
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                textStyle: const TextStyle(fontSize: 16),
-              ),
-              child: const Text("Calculate Solution"),
             ),
-            ],
-            ),
-          ),
-        ),
+          )
       ),
     );
   }
@@ -112,9 +77,9 @@ class _InputScreenState extends State<InputScreen> {
           return "Please enter 9 digits";
         }
         //convert String to set to see if each character is there only once
-        if(value.length != value.split('').toSet().length){
+       /* if(value.length != value.split('').toSet().length){
           return "Please enter each Number only once";
-        }
+        }*/
         return null;
       },
         onSaved: (value) {
