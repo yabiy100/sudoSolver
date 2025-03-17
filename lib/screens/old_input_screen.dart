@@ -60,7 +60,7 @@ class _InputScreenState extends State<NewInputScreen> {
                         ),
                         alignment: Alignment.center,
                         child: Text(
-                          field.toString(),
+                          "test",
                           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       );
@@ -75,13 +75,13 @@ class _InputScreenState extends State<NewInputScreen> {
                       /*
                       print('Form is valid. Lines: $lines');
                       Solver solver = Solver(lines); // Ensure Solver is correctly defined
-                     */
+
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => SolutionScreen(sudoku: solver),
-                        ),
-                      );
+                        //MaterialPageRoute(
+                          //builder: (context) => SolutionScreen(sudoku: solver),
+                        //),
+                      );*/
                     } else {
                       print('Form is not valid.');
                     }
