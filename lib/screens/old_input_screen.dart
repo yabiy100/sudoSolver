@@ -60,8 +60,8 @@ class _InputScreenState extends State<NewInputScreen> {
                         ),
                         alignment: Alignment.center,
                         child: Text(
-                          //field.toString(),
-                          // style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          field.toString(),
+                          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       );
                     },
@@ -72,8 +72,10 @@ class _InputScreenState extends State<NewInputScreen> {
                   onPressed: () {
                     if (_formKey.currentState?.validate() ?? false) {
                       _formKey.currentState?.save();
+                      /*
                       print('Form is valid. Lines: $lines');
                       Solver solver = Solver(lines); // Ensure Solver is correctly defined
+                     */
                       Navigator.push(
                         context,
                         MaterialPageRoute(

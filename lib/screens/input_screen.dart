@@ -49,6 +49,15 @@ class _InputScreenState extends State<InputScreen> {
                     color: Colors.white,
                   ),
                   alignment: Alignment.center,
+                  child: InkWell(
+                    onTap: () {
+                      print("test was klicked");
+                    },
+                    child: Text(
+                      "test",
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 );
               },
             ),
