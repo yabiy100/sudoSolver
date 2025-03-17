@@ -57,6 +57,10 @@ class _InputScreenState extends State<InputScreen> {
                       FilteringTextInputFormatter.digitsOnly
                     ],
                     style: const TextStyle(fontSize: 18),
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,  // Removes the underline (focus border)
+                      contentPadding: EdgeInsets.zero, // Removes internal padding
+                    ),
                   ),
 
                 );
