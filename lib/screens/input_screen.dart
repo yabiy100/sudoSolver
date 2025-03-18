@@ -28,16 +28,10 @@ class _InputScreenState extends State<InputScreen> {
       body: SafeArea(
         child: Container(
         color: Colors.blue,
-          child: SingleChildScrollView(
-          padding: MediaQuery.of(context).orientation == Orientation.portrait
-          ? const EdgeInsets.all(24) // when in Portrait mode
-              : EdgeInsets.symmetric( // when in Landscape mode
-          vertical: 40,
-          horizontal: MediaQuery.of(context).size.width / 5,
-          ),
-            child: Column(
-              children: [
-                Form(
+          child: Column(
+            children: [
+              Expanded(
+                child: Form(
                   key: _formKey,
                   child: Center(
                     child: AspectRatio(
@@ -68,9 +62,10 @@ class _InputScreenState extends State<InputScreen> {
                           );
                         },
                       ),
-                    )
-                  )
+                    ),
+                  ),
                 ),
+              ),
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
@@ -92,9 +87,8 @@ class _InputScreenState extends State<InputScreen> {
                 ),
               ],
             ),
-          ),
-        )
-      )
+        ),
+      ),
     );
   }
 
