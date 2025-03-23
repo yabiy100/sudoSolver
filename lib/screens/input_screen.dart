@@ -16,7 +16,7 @@ class _InputScreenState extends State<InputScreen> {
   final _formKey = GlobalKey<FormState>();
 
   RegExp regExp = RegExp('[0-9]');
-  List<String> fields = [];
+  List<String> fields = List.filled(81, "");
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +72,17 @@ class _InputScreenState extends State<InputScreen> {
                     if (_formKey.currentState?.validate() ?? false) {
                       _formKey.currentState?.save();
                       print('Form is valid. Lines: $fields');
+                      // transform List of Strings to lines to fit existing format
+                      List<String> lines = List.generate(9, (i) {
+                        return fields.sublist(i*9, (i+1) * 9).join("");
+                      });
+                      Solver solver = Solver(lines); // Ensure Solver is correctly defined
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SolutionScreen(sudoku: solver),
+                        ),
+                      );
                     } else {
                       print('Form is not valid.');
                     }
@@ -108,7 +119,7 @@ class _InputScreenState extends State<InputScreen> {
         ),
       validator: (value) {
         if(value == null || value.isEmpty){
-          return "Please enter in the line";
+          return null;
         }
         if(!regExp.hasMatch(value)){
           return "Please only enter in Numbers";
@@ -119,38 +130,14 @@ class _InputScreenState extends State<InputScreen> {
         return null;
       },
         onSaved: (value) {
-          fields[index] = value ?? ""; // if value is null safe empty string ""
+          //empty field is represented by empty String
+          if(value == "" || value == null){
+            fields[index] = "0";
+          }else{
+            fields[index]=  value;
+          }
+          print(fields[index]);
         }
     );
   }
-
-  /*OLD InputField
-  TextFormField inputField(String label, int index) {
-    return TextFormField(
-        decoration: InputDecoration(
-          labelText: label,
-          filled: true, // activates background
-          fillColor: const Color(0xffE29A4C),
-        ),
-        validator: (value) {
-          if(value == null || value.isEmpty){
-            return "Please enter in the line";
-          }
-          if(!regExp.hasMatch(value)){
-            return "Please only enter in Numbers";
-          }
-          if(value.length != 9){
-            return "Please enter 9 digits";
-          }
-          //convert String to set to see if each character is there only once
-          /* if(value.length != value.split('').toSet().length){
-          return "Please enter each Number only once";
-        }*/
-          return null;
-        },
-        onSaved: (value) {
-          lines[index] = value ?? ""; // if value is null safe empty string ""
-        }
-    );
-  }*/
 }
