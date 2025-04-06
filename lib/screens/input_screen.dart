@@ -3,6 +3,7 @@ import "package:flutter/services.dart";
 import "package:sudoku_solver/screens/solution_screen.dart";
 
 import "../data/repositories/solver.dart";
+import "error_screen.dart";
 
 
 class InputScreen extends StatefulWidget {
@@ -76,13 +77,26 @@ class _InputScreenState extends State<InputScreen> {
                       List<String> lines = List.generate(9, (i) {
                         return fields.sublist(i*9, (i+1) * 9).join("");
                       });
-                      Solver solver = Solver(lines); // Ensure Solver is correctly defined
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SolutionScreen(sudoku: solver),
-                        ),
-                      );
+                      Solver solver = Solver(lines);
+                      solver.solveSudoku();
+                      if(solver.getGrid() == null){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ErrorScreen(),
+                          ),
+                        );
+                      }
+                      // Ensure Solver is correctly defined
+                      if(solver.getGrid() != null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                SolutionScreen(sudoku: solver),
+                          ),
+                        );
+                      }
                     } else {
                       print('Form is not valid.');
                     }

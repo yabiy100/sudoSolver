@@ -11,6 +11,8 @@ class Solver {
     this.options = creator.getOptions();
   }
 
+
+
   void solveSudoku() {
     while (changed == true) {
       changed = false;
@@ -34,15 +36,18 @@ class Solver {
         if (field.first == 0) {
           changed = true;
           field.remove(0);
-          List<int> allNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-          removeLineNumbers(row, allNumbers);
-          options[row][col] = List.from(allNumbers);
+          List<int> newNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+          removeLineNumbers(row, newNumbers);
+          options[row][col] = List.from(newNumbers);
           // Options field has more than one possible Number
         } else if (field.length > 1) {
-          changed = true;
+          List<int> oldNumbers = options[row][col];
           List<int> allNumbers = List.from(field);
           removeLineNumbers(row, allNumbers);
-          options[row][col] = List.from(allNumbers);
+          if(oldNumbers.length != allNumbers.length) {
+            changed = true;
+            options[row][col] = List.from(allNumbers);
+          }
         }
       }
     }
@@ -61,15 +66,18 @@ class Solver {
       for (int row = 0; row < lineSize; row++) {
         List<int> field = options[row][col];
         if (field.first == 0 || field.length > 1) {
+          List<int> oldNumbers = options[row][col];
           List<int> columnNumbers = getColumn(col);
-          changed = true;
           field.remove(0);
-          List<int> allNumbers = options[row][col];
+          List<int> newNumbers = options[row][col];
           // Remove numbers already present in the column
           for (int num in columnNumbers) {
-            allNumbers.remove(num);
+            newNumbers.remove(num);
           }
-          options[row][col] = List.from(allNumbers);
+          if(oldNumbers.length != newNumbers.length ) {
+            changed = true;
+            options[row][col] = List.from(newNumbers);
+          }
         }
       }
     }
@@ -90,15 +98,18 @@ class Solver {
       for (int col = sqaureCol; col < sqaureCol + 3; col++) {
         List<int> field = options[row][col];
         if (field.length > 1) {
-          changed = true;
-          List<int> allNumbers = options[row][col];
+          List<int> oldNumbers = options[row][col];
+          List<int> newNumbers = options[row][col];
           //all Numbers that are already set in a sqaure;
           for (int num in squareNumbers) {
             if (num != 0) {
-              allNumbers.remove(num);
+              newNumbers.remove(num);
             }
           }
-          options[row][col] = List.from(allNumbers);
+          if(newNumbers.length != oldNumbers.length) {
+            changed = true;
+            options[row][col] = List.from(oldNumbers);
+          }
         }
       }
     }
@@ -127,6 +138,7 @@ class Solver {
     }
     return sqaure;
   }
+
 
   void printGrid() {
     for (List<int?> line in grid!) {

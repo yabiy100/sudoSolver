@@ -292,5 +292,22 @@ void main() {
     //Assert
     expect(loopSolver.getGrid(), solvedGrid);
   });
+  test("Error for unsolvable Sudoku", (){
+    List<String> twoNumbers = [
+      "020000000",
+      "000000000",
+      "000000000",
+      "000000000",
+      "000000000",
+      "000000000",
+      "000000000",
+      "000000000",
+      "000000030",
+    ];
+
+    Solver twoSolver = Solver(twoNumbers);
+    twoSolver.solveSudoku();
+    expect(twoSolver.getGrid(), null);
+  });
 
 }
