@@ -33,15 +33,14 @@ class _InputScreenState extends State<InputScreen> {
             children: [
               OverflowBar(
                 alignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SudokuButton(number: "1",),
-                  SudokuButton(number: "2",),
-                  SudokuButton(number: "3",),
-                  SudokuButton(number: "4",),
-                  SudokuButton(number: "5",),
-                  SudokuButton(number: "6",),
-                  SudokuButton(number: "7",),
-                ],
+                children: List.generate(6, (index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: SudokuButton(
+                      number: "${index + 1}",
+                    ),
+                  );
+                }),
               ),
               Expanded(
                 child: Form(
@@ -182,7 +181,7 @@ class SudokuButton extends StatelessWidget {
         style: TextButton.styleFrom(
         backgroundColor: Color(0xffE29A4C),
     ),
-    child: Text("Sudoku" + number),
+    child: Text("Sudoku " + number),
     onPressed: () {});
   }
 }
