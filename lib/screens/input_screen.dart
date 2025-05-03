@@ -31,6 +31,18 @@ class _InputScreenState extends State<InputScreen> {
         color: Colors.blue,
           child: Column(
             children: [
+              OverflowBar(
+                alignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SudokuButton(number: "1",),
+                  SudokuButton(number: "2",),
+                  SudokuButton(number: "3",),
+                  SudokuButton(number: "4",),
+                  SudokuButton(number: "5",),
+                  SudokuButton(number: "6",),
+                  SudokuButton(number: "7",),
+                ],
+              ),
               Expanded(
                 child: Form(
                   key: _formKey,
@@ -153,5 +165,24 @@ class _InputScreenState extends State<InputScreen> {
           print(fields[index]);
         }
     );
+  }
+}
+
+class SudokuButton extends StatelessWidget {
+  final String number;
+
+  const SudokuButton({
+    super.key,
+    required this.number
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+        style: TextButton.styleFrom(
+        backgroundColor: Color(0xffE29A4C),
+    ),
+    child: Text("Sudoku" + number),
+    onPressed: () {});
   }
 }
