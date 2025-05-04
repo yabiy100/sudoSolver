@@ -2,7 +2,7 @@ class SudokuGenerator {
   List<List<String>> sudokus = [];
 
   SudokuGenerator() {
-    List<List<String>> sudokus = [
+    sudokus = [
       // Sudoku 1
       [
         "530070000",
