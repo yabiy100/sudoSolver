@@ -44,7 +44,7 @@ class SolutionScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Text(
                   field.toString(),
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
                 ),
               );
             },

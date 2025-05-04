@@ -146,9 +146,8 @@ class _InputScreenState extends State<InputScreen> {
         inputFormatters: <TextInputFormatter>[
           FilteringTextInputFormatter.digitsOnly
         ],
-        style: const TextStyle(fontSize: 36),
-        decoration: const InputDecoration(
-          border: InputBorder.none,  // Removes the underline (focus border)
+        style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+        decoration: const InputDecoration(          border: InputBorder.none,  // Removes the underline (focus border)
           contentPadding: EdgeInsets.zero, // Removes internal padding
         ),
         //if field is empty (0) show notging. Else Show number from sudoku
