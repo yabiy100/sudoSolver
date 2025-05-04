@@ -196,7 +196,7 @@ class SudokuButton extends StatelessWidget {
       onPressed: onPressed,
       child: Text(
         "Sudoku " +  index,
-        style: const TextStyle(color: Colors.black, fontSize: 20),
+        style: const TextStyle(color: Colors.black, fontSize: 36),
       ),
     );
   }
