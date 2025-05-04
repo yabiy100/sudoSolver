@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:sudoku_solver/screens/solution_screen.dart";
 
+import "../data/repositories/SudokuGenerator.dart";
 import "../data/repositories/solver.dart";
 import "error_screen.dart";
 
@@ -37,7 +38,15 @@ class _InputScreenState extends State<InputScreen> {
                   return Padding(
                     padding: const EdgeInsets.all(6.0),
                     child: SudokuButton(
-                      number: "${index + 1}",
+                      index: "${index + 1}",
+                      onPressed: () {
+                        SudokuGenerator generator = new SudokuGenerator();
+                        final sudoku = generator.getSudoku(index);
+                        setState(() {
+                          //konvert List of 9 line to one String Symbol each
+                          fields = sudoku.expand((line) => line.split("")).toList();
+                        });
+                      },
                     ),
                   );
                 }),
@@ -142,7 +151,9 @@ class _InputScreenState extends State<InputScreen> {
           border: InputBorder.none,  // Removes the underline (focus border)
           contentPadding: EdgeInsets.zero, // Removes internal padding
         ),
-      validator: (value) {
+        //if field is empty (0) show notging. Else Show number from sudoku
+        controller: TextEditingController(text: fields[index] == "0" ? "" : fields[index]),
+        validator: (value) {
         if(value == null || value.isEmpty){
           return null;
         }
@@ -168,11 +179,13 @@ class _InputScreenState extends State<InputScreen> {
 }
 
 class SudokuButton extends StatelessWidget {
-  final String number;
+  final VoidCallback onPressed;
+  final String index;
 
   const SudokuButton({
     super.key,
-    required this.number
+    required this.onPressed,
+    required this.index,
   });
 
   @override
@@ -180,8 +193,13 @@ class SudokuButton extends StatelessWidget {
     return TextButton(
         style: TextButton.styleFrom(
         backgroundColor: Color(0xffE29A4C),
-    ),
-    child: Text("Sudoku " + number),
-    onPressed: () {});
+        ),
+      onPressed: onPressed,
+      child: Text(
+        "Sudoku " +  index,
+        style: const TextStyle(color: Colors.black, fontSize: 20),
+      ),
+    );
   }
 }
+
