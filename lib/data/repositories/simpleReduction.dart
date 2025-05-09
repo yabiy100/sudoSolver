@@ -1,6 +1,3 @@
-import 'package:sudoku_solver/data/repositories/Solver.dart';
-import 'package:sudoku_solver/data/repositories/optionsCreator.dart';
-
 class simpleReduction {
   List<List<int>>? grid = [];
   List<List<List<int>>> options = [];
@@ -8,7 +5,6 @@ class simpleReduction {
   bool changed = true;
 
   simpleReduction(this.options);
-
 
   List<List<List<int>>> doReduction() {
     while (changed == true) {
