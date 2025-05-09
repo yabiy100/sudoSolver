@@ -1,7 +1,7 @@
 // Import the test package and Counter class
 
 import 'package:sudoku_solver/data/repositories/optionsCreator.dart';
-import 'package:sudoku_solver/data/repositories/solver.dart';
+import 'package:sudoku_solver/data/repositories/simpleReduction.dart';
 import 'package:test/test.dart';
 
 void main() {

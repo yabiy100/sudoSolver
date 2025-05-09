@@ -15,7 +15,7 @@ class Solver {
 
   void solveSudoku() {
     simpleReduction reduction = new simpleReduction(options);
-    options = reduction.getOptions();
+    options = reduction.doReduction();
     if (OptionsAllSolved()) {
       writeOptionsToGrid();
     } else {
@@ -48,5 +48,8 @@ class Solver {
     return grid;
   }
 
+  List<List<List<int>>> getOptions(){
+    return options;
+}
 
 }

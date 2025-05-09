@@ -1,5 +1,7 @@
 // Import the test package and Counter class
 
+import 'package:flutter/material.dart';
+import 'package:sudoku_solver/data/repositories/Solver.dart';
 import 'package:sudoku_solver/data/repositories/simpleReduction.dart';
 import 'package:test/test.dart';
 
@@ -42,7 +44,8 @@ void main() {
           "008795132",
           "500834976",
         ];
-        simpleReduction leftSolver = simpleReduction(leftInput);
+        Solver leftSolver = Solver(leftInput);
+        simpleReduction reduction = simpleReduction(leftSolver.getOptions());
         List<List<List<int>>> leftOptionField = [
           [[6], [1], [3], [4], [5], [8], [2], [9], [7]],
           [[2,7,8], [2,7,8], [2,7,8], [3], [1], [9], [5], [6], [4]],
@@ -55,9 +58,9 @@ void main() {
           [[5], [1,2], [1,2], [8], [3], [4], [9], [7], [6]],
         ];
         //Act
-        leftSolver.calculateLine();
+        reduction.calculateLine();
         //Assert
-        expect(leftSolver.getOptions(), leftOptionField);
+        expect(reduction.getOptions(), leftOptionField);
       });
     });
 
@@ -76,7 +79,8 @@ void main() {
         "309847010",
         "000050300",
       ];
-      simpleReduction firstRealSolver = simpleReduction(firstSudoku);
+      Solver firstRealSolver = Solver(firstSudoku);
+      simpleReduction reduction = simpleReduction(firstRealSolver.getOptions());
       List<List<List<int>>> firstSudokuOptions = [
         [[4], [1, 2, 3, 9], [5], [6], [7], [8], [1, 2, 3, 9], [1, 2, 3, 9], [1, 2, 3, 9]],
         [[9], [7],        [8], [3], [2], [1], [4], [5], [6]],
@@ -89,9 +93,9 @@ void main() {
         [[1, 2, 4, 6, 7, 8, 9], [1, 2, 4, 6, 7, 8, 9], [1, 2, 4, 6, 7, 8, 9], [1, 2, 4, 6, 7, 8, 9], [5], [1, 2, 4, 6, 7, 8, 9], [3], [1, 2, 4, 6, 7, 8, 9], [1, 2, 4, 6, 7, 8, 9],]
       ];
       //Act
-      firstRealSolver.calculateLine();
+      reduction.calculateLine();
       //Assert
-      expect(firstRealSolver.getOptions(), firstSudokuOptions);
+      expect(reduction.getOptions(), firstSudokuOptions);
     });
 
     test("lines and colum", () {
@@ -107,7 +111,8 @@ void main() {
         "309847010",
         "000050300",
       ];
-      simpleReduction firstRealSolver = simpleReduction(firstSudoku);
+      Solver firstRealSolver = Solver(firstSudoku);
+      simpleReduction reduction = simpleReduction(firstRealSolver.getOptions());
       List<List<List<int>>> firstSudokuOptions = [
         [[4],                   [1, 2, 3],             [5],              [6],             [7],           [8],                   [1],                   [2, 9],                [1, 2, 9]],
         [[9],                   [7],                   [8],              [3],             [2],           [1],                   [4],                      [5],                   [6]],
@@ -120,10 +125,10 @@ void main() {
         [[7],                   [1, 2, 4, 6, 8],       [2],              [1, 9],       [5],           [9],                   [3],                      [2, 6, 8, 9],          [1, 4, 8, 9],]
       ];
       //Act
-      firstRealSolver.calculateLine();
-      firstRealSolver.calculateColumn();
+      reduction.calculateLine();
+      reduction.calculateColumn();
       //Assert
-      expect(firstRealSolver.getOptions(), firstSudokuOptions);
+      expect(reduction.getOptions(), firstSudokuOptions);
     });
     test("lines colums and sqaure", (){
       List<String> sudokuFive = [
@@ -148,11 +153,12 @@ void main() {
         [[6,7],    [2,6],   [2,7],   [3],   [9],       [4],          [5,7,8],      [1],     [2,5,8]],
         [[8],      [3],     [5],     [7],   [1],       [6],          [9],          [2,4],   [2,4]],
       ];
-      simpleReduction fiveSolver = simpleReduction(sudokuFive);
-      fiveSolver.calculateLine();
-      fiveSolver.calculateColumn();
-      fiveSolver.calculateSquare();
-      expect(fiveSolver.getOptions(), sudokuFiveOptions);
+      Solver fiveSolver = Solver(sudokuFive);
+      simpleReduction reduction = simpleReduction(fiveSolver.getOptions());
+      reduction.calculateLine();
+      reduction.calculateColumn();
+      reduction.calculateSquare();
+      expect(reduction.getOptions(), sudokuFiveOptions);
     });
     test("lines horzontal quare until end", (){
       //Arrange
@@ -178,9 +184,10 @@ void main() {
         [[3],                   [6],                   [9],              [8],             [4],           [7],                   [5],                      [1],                   [2]],
         [[7],                   [8],                   [2],              [1],             [5],           [9],                   [3],                      [6],                   [4]]
       ];
-      simpleReduction loopSolver = simpleReduction(firstSudoku);
+      Solver loopSolver = Solver(firstSudoku);
+      simpleReduction reduction = simpleReduction(loopSolver.getOptions());
       //Act
-      loopSolver.doReduction();
+      reduction.doReduction();
       //Assert
       expect(loopSolver.getOptions(), allOnceOptions);
     });
@@ -209,11 +216,12 @@ void main() {
       [[2],                   [4],                   [8],              [9],             [5],           [7],                   [1],                      [3],                   [6]],
       [[7],                   [6],                   [3],              [4],             [1],           [8],                   [2],                      [5],                   [9]]
     ];
-    simpleReduction loopSolver = simpleReduction(firstSudoku);
+    Solver loopSolver = Solver(firstSudoku);
+    simpleReduction reduction = simpleReduction(loopSolver.getOptions());
     //Act
-    loopSolver.doReduction();
+    reduction.doReduction();
     //Assert
-    expect(loopSolver.getOptions(), allOnceOptions);
+    expect(reduction.getOptions(), allOnceOptions);
   });
   test("First Real Sudoku To Gird", (){
     //Arrange
@@ -241,10 +249,8 @@ void main() {
       [7, 6, 3, 4, 1, 8, 2, 5, 9],
     ];
 
-    simpleReduction loopSolver = simpleReduction(firstSudoku);
-    //Act
-    loopSolver.doReduction();
-    //Assert
+    Solver loopSolver = Solver(firstSudoku);
+    loopSolver.solveSudoku();
     expect(loopSolver.getGrid(), solvedGrid);
   });
   test("Error for unsolvable Sudoku", (){
@@ -260,8 +266,9 @@ void main() {
       "000000030",
     ];
 
-    simpleReduction twoSolver = simpleReduction(twoNumbers);
-    twoSolver.doReduction();
+    Solver twoSolver = Solver(twoNumbers);
+    simpleReduction reduction = simpleReduction(twoSolver.getOptions());
+    twoSolver.solveSudoku();
     expect(twoSolver.getGrid(), null);
   });
 
