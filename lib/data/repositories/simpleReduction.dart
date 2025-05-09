@@ -124,7 +124,4 @@ class simpleReduction extends solvingTechniques{
     }
     return sqaure;
   }
-
-
-
 }

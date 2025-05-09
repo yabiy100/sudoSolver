@@ -1,4 +1,4 @@
-import 'package:sudoku_solver/data/repositories/optionsCreator.dart';
+import 'package:sudoku_solver/screens/hiddenSingles.dart';
 import 'package:test/test.dart';
 
 void main(){
@@ -26,6 +26,7 @@ void main(){
       [[], [], [], [], [], [], [], [], []],
     ];
     hiddenSingles singles = new hiddenSingles(options);
+    singles.singlesInLine();
     expect(singles.getOptions(), expextedOutput);
   });
 }
