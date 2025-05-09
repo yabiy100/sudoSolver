@@ -1,7 +1,3 @@
-import 'package:sudoku_solver/data/repositories/simpleReduction.dart';
-
-import 'optionsCreator.dart';
-
 class solvingTechniques {
   List<List<int>>? grid = [];
   List<List<List<int>>> options = [];
