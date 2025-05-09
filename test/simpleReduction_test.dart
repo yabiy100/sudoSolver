@@ -1,4 +1,4 @@
-import 'package:sudoku_solver/data/repositories/Solver.dart';
+import 'package:sudoku_solver/data/repositories/solver.dart';
 import 'package:sudoku_solver/data/repositories/simpleReduction.dart';
 import 'package:test/test.dart';
 
@@ -264,7 +264,6 @@ void main() {
     ];
 
     Solver twoSolver = Solver(twoNumbers);
-    simpleReduction reduction = simpleReduction(twoSolver.getOptions());
     twoSolver.solveSudoku();
     expect(twoSolver.getGrid(), null);
   });
@@ -293,7 +292,7 @@ void main() {
       [2,9,3,4,1,7,5,6,8],
       [8,7,1,2,6,5,4,9,3],
     ];
-    Solver.dart hardSolver = Solver.dart(input);
+    solver.dart hardSolver = solver.dart(input);
     hardSolver.solveSudoku();
     expect(hardSolver.getOptions(), solvedGrid);
   });

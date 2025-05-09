@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sudoku_solver/screens/input_screen.dart';
 void main() {
   /* test Sudoku for solution Screen
-  Solver.dart testSudoku = Solver.dart([
+  solver.dart testSudoku = solver.dart([
     "003009267",
     "090860000",
     "201500400",

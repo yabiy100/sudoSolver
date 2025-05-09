@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "../data/repositories/Solver.dart";
+import "../data/repositories/solver.dart";
 
 class SolutionScreen extends StatelessWidget {
   final Solver sudoku;
