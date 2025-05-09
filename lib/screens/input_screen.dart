@@ -1,9 +1,10 @@
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
+import "package:sudoku_solver/data/repositories/Solver.dart";
 import "package:sudoku_solver/screens/solution_screen.dart";
 
 import "../data/repositories/SudokuGenerator.dart";
-import "../data/repositories/solver.dart";
+import "../data/repositories/simpleReduction.dart";
 import "error_screen.dart";
 
 

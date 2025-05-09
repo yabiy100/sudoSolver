@@ -1,6 +1,6 @@
 // Import the test package and Counter class
 
-import 'package:sudoku_solver/data/repositories/solver.dart';
+import 'package:sudoku_solver/data/repositories/simpleReduction.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -42,7 +42,7 @@ void main() {
           "008795132",
           "500834976",
         ];
-        Solver leftSolver = Solver(leftInput);
+        simpleReduction leftSolver = simpleReduction(leftInput);
         List<List<List<int>>> leftOptionField = [
           [[6], [1], [3], [4], [5], [8], [2], [9], [7]],
           [[2,7,8], [2,7,8], [2,7,8], [3], [1], [9], [5], [6], [4]],
@@ -76,7 +76,7 @@ void main() {
         "309847010",
         "000050300",
       ];
-      Solver firstRealSolver = Solver(firstSudoku);
+      simpleReduction firstRealSolver = simpleReduction(firstSudoku);
       List<List<List<int>>> firstSudokuOptions = [
         [[4], [1, 2, 3, 9], [5], [6], [7], [8], [1, 2, 3, 9], [1, 2, 3, 9], [1, 2, 3, 9]],
         [[9], [7],        [8], [3], [2], [1], [4], [5], [6]],
@@ -107,7 +107,7 @@ void main() {
         "309847010",
         "000050300",
       ];
-      Solver firstRealSolver = Solver(firstSudoku);
+      simpleReduction firstRealSolver = simpleReduction(firstSudoku);
       List<List<List<int>>> firstSudokuOptions = [
         [[4],                   [1, 2, 3],             [5],              [6],             [7],           [8],                   [1],                   [2, 9],                [1, 2, 9]],
         [[9],                   [7],                   [8],              [3],             [2],           [1],                   [4],                      [5],                   [6]],
@@ -148,7 +148,7 @@ void main() {
         [[6,7],    [2,6],   [2,7],   [3],   [9],       [4],          [5,7,8],      [1],     [2,5,8]],
         [[8],      [3],     [5],     [7],   [1],       [6],          [9],          [2,4],   [2,4]],
       ];
-      Solver fiveSolver = Solver(sudokuFive);
+      simpleReduction fiveSolver = simpleReduction(sudokuFive);
       fiveSolver.calculateLine();
       fiveSolver.calculateColumn();
       fiveSolver.calculateSquare();
@@ -178,9 +178,9 @@ void main() {
         [[3],                   [6],                   [9],              [8],             [4],           [7],                   [5],                      [1],                   [2]],
         [[7],                   [8],                   [2],              [1],             [5],           [9],                   [3],                      [6],                   [4]]
       ];
-      Solver loopSolver = Solver(firstSudoku);
+      simpleReduction loopSolver = simpleReduction(firstSudoku);
       //Act
-      loopSolver.solveSudoku();
+      loopSolver.doReduction();
       //Assert
       expect(loopSolver.getOptions(), allOnceOptions);
     });
@@ -209,9 +209,9 @@ void main() {
       [[2],                   [4],                   [8],              [9],             [5],           [7],                   [1],                      [3],                   [6]],
       [[7],                   [6],                   [3],              [4],             [1],           [8],                   [2],                      [5],                   [9]]
     ];
-    Solver loopSolver = Solver(firstSudoku);
+    simpleReduction loopSolver = simpleReduction(firstSudoku);
     //Act
-    loopSolver.solveSudoku();
+    loopSolver.doReduction();
     //Assert
     expect(loopSolver.getOptions(), allOnceOptions);
   });
@@ -241,9 +241,9 @@ void main() {
       [7, 6, 3, 4, 1, 8, 2, 5, 9],
     ];
 
-    Solver loopSolver = Solver(firstSudoku);
+    simpleReduction loopSolver = simpleReduction(firstSudoku);
     //Act
-    loopSolver.solveSudoku();
+    loopSolver.doReduction();
     //Assert
     expect(loopSolver.getGrid(), solvedGrid);
   });
@@ -260,8 +260,8 @@ void main() {
       "000000030",
     ];
 
-    Solver twoSolver = Solver(twoNumbers);
-    twoSolver.solveSudoku();
+    simpleReduction twoSolver = simpleReduction(twoNumbers);
+    twoSolver.doReduction();
     expect(twoSolver.getGrid(), null);
   });
 
@@ -289,7 +289,7 @@ void main() {
       [2,9,3,4,1,7,5,6,8],
       [8,7,1,2,6,5,4,9,3],
     ];
-    Solver hardSolver = Solver(input);
+    Solver.dart hardSolver = Solver.dart(input);
     hardSolver.solveSudoku();
     expect(hardSolver.getOptions(), solvedGrid);
   });

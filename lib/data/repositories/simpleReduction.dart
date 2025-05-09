@@ -1,31 +1,23 @@
+import 'package:sudoku_solver/data/repositories/Solver.dart';
 import 'package:sudoku_solver/data/repositories/optionsCreator.dart';
 
-class Solver {
+class simpleReduction {
   List<List<int>>? grid = [];
   List<List<List<int>>> options = [];
   int lineSize = 9;
   bool changed = true;
 
-  Solver(List<String> rawInput) {
-    optionsCreator creator = optionsCreator(rawInput);
-    this.options = creator.getOptions();
-  }
+  simpleReduction(this.options);
 
 
-
-  void solveSudoku() {
+  List<List<List<int>>> doReduction() {
     while (changed == true) {
       changed = false;
       calculateLine();
       calculateColumn();
       calculateSquare();
     }
-    if(OptionsAllSolved()){
-      writeOptionsToGrid();
-    } else{
-      grid = null;
-    }
-
+    return options;
   }
 
   void calculateLine() {
@@ -44,7 +36,7 @@ class Solver {
           List<int> oldNumbers = options[row][col];
           List<int> allNumbers = List.from(field);
           removeLineNumbers(row, allNumbers);
-          if(oldNumbers.length != allNumbers.length) {
+          if (oldNumbers.length != allNumbers.length) {
             changed = true;
             options[row][col] = List.from(allNumbers);
           }
@@ -74,7 +66,7 @@ class Solver {
           for (int num in columnNumbers) {
             newNumbers.remove(num);
           }
-          if(oldNumbers.length != newNumbers.length ) {
+          if (oldNumbers.length != newNumbers.length) {
             changed = true;
             options[row][col] = List.from(newNumbers);
           }
@@ -106,7 +98,7 @@ class Solver {
               newNumbers.remove(num);
             }
           }
-          if(newNumbers.length != oldNumbers.length) {
+          if (newNumbers.length != oldNumbers.length) {
             changed = true;
             options[row][col] = List.from(oldNumbers);
           }
@@ -158,26 +150,5 @@ class Solver {
     for (List<List<int?>> line in options) {
       print(line);
     }
-  }
-
-  void writeOptionsToGrid() {
-    for (List<List<int>> line in options) {
-      List<int> gridLine = [];
-      for (List<int> field in line) {
-        gridLine.add(field.first);
-      }
-      grid?.add(gridLine);
-    }
-  }
-
-  bool OptionsAllSolved() {
-    for (List<List<int>> line in options) {
-      for (List<int> field in line) {
-        if(field.length != 1){
-          return false;
-        }
-      }
-    }
-    return true;
   }
 }

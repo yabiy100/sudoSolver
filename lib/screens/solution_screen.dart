@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
-import "package:sudoku_solver/data/repositories/solver.dart";
+import "package:sudoku_solver/data/repositories/simpleReduction.dart";
+
+import "../data/repositories/Solver.dart";
 
 
 class SolutionScreen extends StatelessWidget {
