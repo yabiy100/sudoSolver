@@ -1,10 +1,8 @@
-class simpleReduction {
-  List<List<int>>? grid = [];
-  List<List<List<int>>> options = [];
-  int lineSize = 9;
-  bool changed = true;
+import 'package:sudoku_solver/data/repositories/solvingTechniques.dart';
 
-  simpleReduction(this.options);
+class simpleReduction extends solvingTechniques{
+
+  simpleReduction(super.options);
 
   List<List<List<int>>> doReduction() {
     while (changed == true) {
@@ -128,23 +126,5 @@ class simpleReduction {
   }
 
 
-  void printGrid() {
-    for (List<int?> line in grid!) {
-      print(line);
-    }
-  }
 
-  List<List<int>>? getGrid() {
-    return grid;
-  }
-
-  List<List<List<int>>> getOptions() {
-    return options;
-  }
-
-  void printOptions() {
-    for (List<List<int?>> line in options) {
-      print(line);
-    }
-  }
 }
