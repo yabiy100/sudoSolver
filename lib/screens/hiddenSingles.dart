@@ -12,17 +12,17 @@ class hiddenSingles extends solvingTechniques{
         List<int> field = options[row][col];
         if(field.length > 1){
           for(int number in field){
-            counter[number]++;
+            counter[number-1]++;
           }
         }
       }
       //check if single is found
       for(int col = 0; col < lineSize; col++){
         if(counter[col] == 1) {
-          for (int i = 0; i < lineSize; i++) {
-            List<int> field = options[row][i];
-            if (field.contains(col)) {
-              options[row][i] = [col];
+          for(int index = 0; index < lineSize; index++){
+            List<int> field = options[row][index];
+            if(field.contains(col+1)) {
+              options[row][index] = [col + 1];
             }
           }
         }
