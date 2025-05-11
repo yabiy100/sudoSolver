@@ -29,6 +29,7 @@ void main(){
     singles.singlesInLine();
     expect(singles.getOptions(), expextedOutput);
   });
+
   test("larger single in one line", (){
     List<List<List<int>>> options = [
       [[2,3,4], [2,3,4], [], [], [], [], [], [], []],
@@ -56,6 +57,7 @@ void main(){
     singles.singlesInLine();
     expect(singles.getOptions(), expextedOutput);
   });
+
   test("two single in one row", (){
     List<List<List<int>>> options = [
       // 2 and 4 are singles
@@ -84,6 +86,7 @@ void main(){
     singles.singlesInLine();
     expect(singles.getOptions(), expectedOutput);
   });
+
   test("single in a row", (){
     List<List<List<int>>> options = [
       [[2], [], [], [], [], [], [], [], []],
@@ -96,7 +99,7 @@ void main(){
       [[1,3,4,5,6], [], [], [], [], [], [], [], []],
       [[6,7,8], [], [], [], [], [], [], [], []],
     ];
-    List<List<List<int>>> expextedOutput = [
+    List<List<List<int>>> expectedOutput = [
       [[2], [], [], [], [], [], [], [], []],
       [[1,3], [], [], [], [], [], [], [], []],
       [[9], [], [], [], [], [], [], [], []],
@@ -109,6 +112,34 @@ void main(){
     ];
     hiddenSingles singles = new hiddenSingles(options);
     singles.singlesInRow();
+    expect(singles.getOptions(), expectedOutput);
+  });
+
+  test("hidden single in square", (){
+    List<List<List<int>>> options = [
+      [[6,7,8], [9], [7,8], [], [], [], [], [], []],
+      [[4,5,6], [5,6,7], [5,6,7], [], [], [], [], [], []],
+      [[1,2,3], [2,3,4], [6,7,8], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+    ];
+    List<List<List<int>>> expextedOutput = [
+      [[6,7,8], [9], [7,8], [], [], [], [], [], []],
+      [[4,5,6], [5,6,7], [5,6,7], [], [], [], [], [], []],
+      [[1], [2,3,4], [6,7,8], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], []],
+    ];
+    hiddenSingles singles = new hiddenSingles(options);
+    singles.singlesInSquare();
     expect(singles.getOptions(), expextedOutput);
   });
 }
