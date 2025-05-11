@@ -55,4 +55,44 @@ class hiddenSingles extends solvingTechniques{
       }
     }
   }
+
+  void singlesInOneSquare(int squareRow, int squareCol) {
+    List<int> counter = [0,0,0,0,0,0,0,0,0];
+    for (int row = squareRow; row < squareRow + 3; row++) {
+      for (int col = squareCol; col < squareCol + 3; col++) {
+        List<int> field = options[row][col];
+        if(field.length > 1){
+          for(int number in field){
+            counter[number-1]++;
+          }
+        }
+      }
+    }
+    int squareIndex = 0;
+    for (int row = squareRow; row < squareRow + 3; row++) {
+      for (int col = squareCol; col < squareCol + 3; col++) {
+        if(counter[squareIndex] == 1) {
+          for (int row = squareRow; row < squareRow + 3; row++) {
+            for (int col = squareCol; col < squareCol + 3; col++) {
+              List<int> field = options[row][col];
+              if(field.contains(squareIndex+1)){
+                options[row][col] = [squareIndex + 1];
+              }
+            }
+          }
+        }
+        squareIndex++;
+      }
+    }
+  }
+
+  void singlesInSquare(){
+    for (int row = 0; row < lineSize; row = row + 3) {
+      for (int col = 0; col < lineSize; col = col + 3) {
+        singlesInOneSquare(row, col);
+      }
+    }
+  }
+
+
 }

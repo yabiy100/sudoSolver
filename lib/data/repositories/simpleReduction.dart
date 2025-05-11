@@ -78,10 +78,10 @@ class simpleReduction extends solvingTechniques{
     }
   }
 
-  void calculateOneSqaure(int sqaureRow, sqaureCol) {
-    List<int> squareNumbers = findNumbersInSqaure(sqaureRow, sqaureCol);
-    for (int row = sqaureRow; row < sqaureRow + 3; row++) {
-      for (int col = sqaureCol; col < sqaureCol + 3; col++) {
+  void calculateOneSqaure(int squareRow, squareCol) {
+    List<int> squareNumbers = findNumbersInSqaure(squareRow, squareCol);
+    for (int row = squareRow; row < squareRow + 3; row++) {
+      for (int col = squareCol; col < squareCol + 3; col++) {
         List<int> field = options[row][col];
         if (field.length > 1) {
           List<int> oldNumbers = options[row][col];
@@ -112,16 +112,5 @@ class simpleReduction extends solvingTechniques{
     return column;
   }
 
-  //return a list with all set Numbers in a 3x3 Sudoku Square
-  List<int> findNumbersInSqaure(int startRow, int startCol) {
-    List<int> sqaure = [];
-    for (int row = startRow; row < startRow + 3; row++) {
-      for (int col = startCol; col < startCol + 3; col++) {
-        if (options[row][col].length == 1) {
-          sqaure.add(options[row][col].first);
-        }
-      }
-    }
-    return sqaure;
-  }
+
 }
