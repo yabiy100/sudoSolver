@@ -49,6 +49,21 @@ class _InputScreenState extends State<InputScreen> {
                   );
                 }),
               ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    fields = List.filled(81, "");
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xffE29A4C),
+                  foregroundColor: Colors.black,
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 24, vertical: 12),
+                  textStyle: const TextStyle(fontSize: 16),
+                ),
+                child: const Text("Clear Sudoku"),
+              ),
               Expanded(
                 child: Form(
                   key: _formKey,
@@ -199,4 +214,3 @@ class SudokuButton extends StatelessWidget {
     );
   }
 }
-
